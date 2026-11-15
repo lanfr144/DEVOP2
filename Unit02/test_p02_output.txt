@@ -1,4 +1,4 @@
-=== P02 test - 2026-11-15T18:35:19Z
+=== P02 test - 2026-11-15T19:21:29Z
 PASS  1 compose valid; healthcheck on elasticsearch + kibana (setup = one-shot job)
 PASS  2 no secret outside .env (docx included); .env git-ignored; .env.example present
 PASS  3 elasticsearch=healthy, kibana=healthy

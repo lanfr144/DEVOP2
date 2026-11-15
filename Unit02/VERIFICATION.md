@@ -32,6 +32,14 @@ Si un panneau affiche une erreur : *Edit* sur le panneau, corriger dans Lens, *S
 
 Dans *Discover* : période « Last 1 year », requête `level : "ERROR"` → 5 documents.
 
+Scripts utiles :
+
+| Script | Rôle |
+|---|---|
+| `./run_queries.sh` | affiche en direct les requêtes de la partie A (lecture seule) ; `--raw` pour le JSON complet |
+| `./load_logs.sh` | recharge les 15 logs depuis `logs-demo-export.json` si l'index est vide (pas de doublon) |
+| `docker compose exec tools ./use_curl.sh` | les commandes `curl` du cours ; les écritures vont dans un index d'essai supprimé à la fin |
+
 ## 3. Fichiers à contrôler
 
 | Fichier | Ce qu'il faut y vérifier |
