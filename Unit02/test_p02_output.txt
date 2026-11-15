@@ -1,4 +1,4 @@
-=== P02 test - 2026-10-26T19:08:29Z
+=== P02 test - 2026-11-15T18:35:19Z
 PASS  1 compose valid; healthcheck on elasticsearch + kibana (setup = one-shot job)
 PASS  2 no secret outside .env (docx included); .env git-ignored; .env.example present
 PASS  3 elasticsearch=healthy, kibana=healthy
@@ -8,6 +8,6 @@ PASS  5 filter level=ERROR: 5 (= query_b_filter.json)
 PASS  5 aggregation by level: [('ERROR', 5), ('INFO', 6), ('WARN', 4)] (= query_c_agg_level.json)
 PASS  5 custom agg top 3 services: [('auth-api', 5), ('orders-api', 5), ('payment-api', 5)] (= query_custom_agg.json)
 PASS  6 logs-demo-export.json holds all 15 documents
-PASS  7 Kibana available; data views [logs-demo*,logs-demo*] on @timestamp; dashboard p02-dashboard: 2 panels, 2 Lens; ERROR in Kibana=5 = Part A=5
-      manual step left: open http://localhost:5602/app/dashboards#/view/p02-dashboard and take the screenshot
+PASS  7 Kibana available; data views [logs-demo*,logs-demo*] on @timestamp; dashboard p02-dashboard: 4 panels, 4 Lens; ERROR in Kibana=5 = Part A=5
+      dashboard.png present (screenshot of http://localhost:5602/app/dashboards#/view/p02-dashboard)
 === ALL TESTS PASSED

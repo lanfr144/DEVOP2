@@ -7,7 +7,7 @@ Le détail des corrections du 26/10 (P01 à P03) reste dans `PLAN.md`.
 
 | Unité | Sujet | État | Reste à faire |
 |---|---|---|---|
-| 01-A | Frise « un jalon DevOps » (1 page) | 🟡 PDF rédigé (`Unit01/P01A_DELIVERABLE.pdf`) | Relire `Unit01/P01A_DELIVERABLE.pdf`, préparer l'oral de 5 minutes |
+| 01-A | Frise « un jalon DevOps » (1 page) | 🟡 PDF rédigé (`Unit01/devopsMilestone.pdf`) | Relire `Unit01/devopsMilestone.pdf`, préparer l'oral de 5 minutes |
 | 01-B | Logs dans MongoDB (P01) | ✅ fait, testé 8/8 | Rien |
 | 01 | API Basics (HTTP, JSON, gRPC) | ✅ réponses dans le docx | Corriger une réponse (voir §3) |
 | 02 | Elasticsearch + Kibana (P02) | ✅ fait, dashboard à 4 panneaux capturé | Relancer `./test_p02.sh` pour mettre à jour sa sortie |

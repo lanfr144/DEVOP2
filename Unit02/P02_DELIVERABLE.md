@@ -44,7 +44,7 @@ Elasticsearch makes free-text log search much easier: the inverted index finds "
 ./kibana/create_dashboard.sh     # (re)creates the 4 objects; overwrite=true, no duplicates
 ```
 
-### Remaining manual step: the screenshot
+### The screenshot (`dashboard.png`, taken 2026-11-15)
 
 1. Open <http://localhost:5602/app/dashboards#/view/p02-dashboard> (login `elastic` / `PASSWORD_ELASTIC` from `.env`).
 2. Check that the four panels show data (time range "Last 1 year"). If one doesn't, open it in Lens with *Edit*, fix it, and *Save*.

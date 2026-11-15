@@ -144,7 +144,11 @@ if [ "$st" = available ] && [ "$tf" = "@timestamp" ] && [ "$panels" -ge 2 ] && [
 else
   fail "7 Kibana status=$st timefield=$tf panels=$panels lens=$lens errors kibana=$kerr partA=$ferr"
 fi
-echo "      manual step left: open $KB_HOST/app/dashboards#/view/p02-dashboard and take the screenshot"
+if [ -s dashboard.png ]; then
+  echo "      dashboard.png present (screenshot of $KB_HOST/app/dashboards#/view/p02-dashboard)"
+else
+  echo "      manual step left: open $KB_HOST/app/dashboards#/view/p02-dashboard and save the screenshot as dashboard.png"
+fi
 
 echo "=== $([ $FAILS -eq 0 ] && echo 'ALL TESTS PASSED' || echo "$FAILS TEST(S) FAILED")"
 exit $FAILS
