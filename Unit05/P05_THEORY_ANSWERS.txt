@@ -1,0 +1,93 @@
+DEVOP2 - Unit 05 - Rollback Strategies
+Theoretical exercises (section 7 of "Unit 05 - Rollback Strategies v2")
+Author: François Lange
+
+
+1. What is the difference between git revert and git reset? Describe what each one does
+   to the history.
+
+git revert creates a new commit that applies the opposite of an earlier commit. Nothing is
+removed: the faulty commit and the commit that cancels it are both visible, so the history
+only grows. git reset moves the branch pointer back to an earlier commit. The commits that
+came after it are no longer on the branch, so the history is rewritten. With revert, a
+colleague who pulls simply receives one more commit. With reset, the branch on my machine
+no longer matches the one on the server, and the only way to publish it is a forced push.
+That is why revert is the command for shared branches and reset is kept for local,
+unpushed commits.
+
+
+2. Why is git reset --hard dangerous? In which situation is it safe to use?
+
+The three reset modes all remove the commit from the branch, but --hard also clears the
+staging area and overwrites the working directory. Any change that was never committed is
+discarded, and Git has no copy of it: the reflog only protects commits. The second danger
+is the history: if the removed commits were already pushed, the local branch is behind the
+server and publishing it needs git push --force, which breaks the history of everyone who
+pulled. It is safe when two conditions are true together: the commits being removed have
+never been pushed (they exist only on my machine), and git status shows no uncommitted
+work that I still need.
+
+
+3. How can you recover a commit after a hard reset? Name one thing that cannot be
+   recovered this way.
+
+Git records every movement of HEAD in the reflog. After git reset --hard the commit is not
+on any branch any more, but it is still stored in the repository. git reflog lists the
+previous positions of HEAD with their hashes; I look for the line of the lost commit and
+run git reset --hard <hash> (or git branch rescue <hash> to keep it on a separate branch).
+The limits: the reflog is local, so it does not exist in a fresh clone, and its entries
+expire (90 days by default). What cannot be recovered is work that was never committed:
+edits in the working directory discarded by git reset --hard or git restore were never
+stored by Git, so the reflog has nothing to point to.
+
+
+4. How do you restore a tracked file that was deleted? Why can a file that was never
+   added not be restored?
+
+For a tracked file, git restore <file> brings it back as it is in the staging area, which
+is normally the content of the last commit (the older syntax is git checkout HEAD --
+<file>). To get the version of an older commit, I add --source=<commit>. This works
+because Git stored a copy of the file when it was added and committed. A file that was
+created and deleted without ever being passed to git add was never stored by Git: there
+is no object for it in the repository, so git restore answers with an error. Only the
+operating system can help then (recycle bin, backup, editor history). If the file had at
+least been staged with git add, Git would have had a copy and could restore it.
+
+
+5. When should you use a hotfix branch instead of a reset?
+
+As soon as the faulty commit is on a shared or production branch, for example main after a
+push or after a tagged release. A reset there rewrites a history that other people and the
+CI/CD pipeline already have, and it must be followed by a forced push. With a hotfix
+branch, I create a short-lived branch from main, commit the fix, merge it back and tag a
+new PATCH version (v2.0.2 in the lab). This is the roll-forward strategy: nothing is
+deleted, the problem and its fix both stay visible in the history, and the released tags
+are not moved. Reset stays useful only for my own local commits that nobody else has seen.
+
+
+6. Why is git push --force dangerous on a shared branch? Describe what happens to a
+   colleague who pulled the branch before the forced push.
+
+A forced push replaces the branch on the server with my local branch, without checking
+that the server commits are contained in mine. Every commit that is on the server but not
+in my branch disappears from it, including commits pushed by other people in the meantime.
+A colleague who pulled before the forced push still has the old commits. Their branch and
+the server branch have now diverged: git pull tries to merge the old history with the new
+one, which brings the removed commits back or produces conflicts, and a normal push is
+rejected. If they had built work on top of the old commits, they must rebase it by hand
+onto the new history. The team loses time and can lose work without noticing it.
+
+
+7. Version 3.0.0 of an application renames a database column. The release fails and the
+   team redeploys 2.9.0. Explain why this rollback may not be enough, and what the team
+   should have prepared.
+
+Redeploying 2.9.0 rolls back the code, not the data. The migration of 3.0.0 has already
+renamed the column, so version 2.9.0 still asks for the old name and its queries fail:
+the application is back but it does not work. Data written by 3.0.0 during the incident
+is also in the new format. The team should have kept the schema change backward
+compatible: add the new column next to the old one, let the code write to both, switch
+the reads, and delete the old column only in a later release, once going back is no
+longer needed (expand, then contract). They should also have written and tested the
+rollback plan before the release: a down-migration script, a backup of the database, and
+a check that 2.9.0 runs against the new schema.

@@ -1,0 +1,178 @@
+# ==============================================================================
+# DEVOP2 - Unit 02 - Elasticsearch 8 (TLS + auth) + Kibana (P02)
+# ==============================================================================
+# Usage:
+#   ./start.sh                  # .env check + host-port check + up --wait
+#   (or by hand: cp .env.example .env ; docker compose up -d --build --wait)
+#   docker compose config -q    # validate this file (no output = OK)
+#   docker compose up -d --wait # setup -> elasticsearch (healthy) -> kibana (healthy)
+#   ./test_p02.sh               # automated test of the deliverable
+#
+# Secrets: passwords come only from .env (PASSWORD_ELASTIC, PASSWORD_KIBANA);
+# .env is git-ignored, .env.example contains dummy values only.
+#
+# Healthchecks:
+#   - setup         : one-shot job (no healthcheck), elasticsearch waits for it
+#                     with condition: service_completed_successfully
+#   - elasticsearch : HTTPS answers "missing authentication credentials"
+#                     => TLS + security are up
+#   - kibana        : /api/status returns HTTP 200
+# ==============================================================================
+
+networks:
+  elastic-net:
+    driver: bridge
+
+volumes:
+  certs:
+    driver: local
+  es_data:
+    driver: local
+  kibana_data:
+    driver: local
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. Security & Certificate Initializer (Elasticsearch 8.x TLS requirement)
+  # ----------------------------------------------------------------------------
+  setup:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    container_name: es-setup
+    volumes:
+      - certs:/usr/share/elasticsearch/config/certs
+    user: "0" # Run as root to set permissions
+    command: >
+      bash -c '
+        if [ ! -f config/certs/ca.zip ]; then
+          echo "Creating CA Certificate...";
+          bin/elasticsearch-certutil ca --silent --pem -out config/certs/ca.zip;
+          unzip -qo config/certs/ca.zip -d config/certs;
+        fi;
+        if [ ! -f config/certs/certs.zip ]; then
+          echo "Creating instances.yml for TLS certificate generation...";
+          echo -e "instances:\n  - name: elasticsearch\n    dns:\n      - elasticsearch\n      - localhost\n    ip:\n      - 127.0.0.1\n  - name: kibana\n    dns:\n      - kibana\n      - localhost\n    ip:\n      - 127.0.0.1" > config/certs/instances.yml;
+          bin/elasticsearch-certutil cert --silent --pem -out config/certs/certs.zip --in config/certs/instances.yml --ca-cert config/certs/ca/ca.crt --ca-key config/certs/ca/ca.key;
+          unzip -qo config/certs/certs.zip -d config/certs;
+        fi;
+        chown -R 1000:0 config/certs;
+        chmod -R 750 config/certs;
+        echo "TLS Certificates initialization complete.";
+      '
+    networks:
+      - elastic-net
+
+  # ----------------------------------------------------------------------------
+  # 2. Elasticsearch 8.x Node
+  # ----------------------------------------------------------------------------
+  elasticsearch:
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    container_name: elasticsearch
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${ES_PORT_EXPOSE}:${ES_PORT_IN}"
+      - "127.0.0.1:${ES_TRANSPORT_PORT_EXPOSE}:${ES_TRANSPORT_PORT_IN}"
+    volumes:
+      - certs:/usr/share/elasticsearch/config/certs
+      - es_data:/usr/share/elasticsearch/data
+    environment:
+      - node.name=${NODE_NAME}
+      - cluster.name=${CLUSTER_NAME}
+      - discovery.type=${DISCOVERY_TYPE}
+      # Password of the "elastic" superuser, read from .env
+      - ELASTIC_PASSWORD=${PASSWORD_ELASTIC}
+      - ES_JAVA_OPTS=${ES_JAVA_OPTS}
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=true
+      - xpack.security.http.ssl.key=certs/elasticsearch/elasticsearch.key
+      - xpack.security.http.ssl.certificate=certs/elasticsearch/elasticsearch.crt
+      - xpack.security.http.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.key=certs/elasticsearch/elasticsearch.key
+      - xpack.security.transport.ssl.certificate=certs/elasticsearch/elasticsearch.crt
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca/ca.crt
+      - xpack.security.transport.ssl.verification_mode=certificate
+    networks:
+      - elastic-net
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s --cacert config/certs/ca/ca.crt https://localhost:9200 | grep -q 'missing authentication credentials'"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ----------------------------------------------------------------------------
+  # 3. Kibana Management Console
+  # ----------------------------------------------------------------------------
+  kibana:
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+    container_name: kibana
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${KIBANA_PORT_EXPOSE}:${KIBANA_PORT_IN}"
+    volumes:
+      - certs:/usr/share/kibana/config/certs
+      - kibana_data:/usr/share/kibana/data
+    environment:
+      - SERVERNAME=kibana
+      - ELASTICSEARCH_HOSTS=https://elasticsearch:${ES_PORT_IN}
+      - ELASTICSEARCH_USERNAME=kibana_system
+      # Least-privilege account kibana_system (never the elastic superuser);
+      # its password is read from .env
+      - ELASTICSEARCH_PASSWORD=${PASSWORD_KIBANA}
+      - ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES=config/certs/ca/ca.crt
+      - ELASTICSEARCH_SSL_VERIFICATIONMODE=certificate
+    networks:
+      - elastic-net
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -I http://localhost:5601/api/status | grep -q 'HTTP/1.1 200 OK'"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # ----------------------------------------------------------------------------
+  # 4. Toolbox - prerequisites of the exercise (curl, python)
+  # ----------------------------------------------------------------------------
+  # Nothing is installed on the host: curl and python run inside this container
+  # and reach the stack by service name (ES_URL / KIBANA_URL below).
+  #   docker compose exec tools curl -sk -u elastic "$ES_URL/_cluster/health?pretty"
+  # The image (../docker/Dockerfile) carries its own HEALTHCHECK.
+  tools:
+    build:
+      context: ../docker
+    image: devop2-tools:1.0
+    healthcheck:
+      # same test as the HEALTHCHECK of ../docker/Dockerfile, repeated here so
+      # that "docker compose config" shows a healthcheck for every service
+      test:
+        - "CMD-SHELL"
+        - "python -c 'import yaml, dotenv, pymongo' && git --version >/dev/null && gh --version >/dev/null && curl --version >/dev/null || exit 1"
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    init: true
+    restart: unless-stopped
+    networks:
+      - elastic-net
+    working_dir: /work/Unit02
+    volumes:
+      - ..:/work
+    environment:
+      ES_URL: https://elasticsearch:${ES_PORT_IN}
+      KIBANA_URL: http://kibana:${KIBANA_PORT_IN}
+    depends_on:
+      kibana:
+        condition: service_healthy

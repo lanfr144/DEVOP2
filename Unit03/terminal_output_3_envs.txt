@@ -1,0 +1,16 @@
+# DEVOP2 Unit 03 - output of app.py in the 3 environments (2026-11-15)
+
+$ APP_ENV=dev python app.py
+[DEBUG MODE] Verbose logs enabled
+Connecting to DB: postgresql://dev_user:****@localhost:5432/dev_db
+Using API key: dev-... (masked)
+
+$ APP_ENV=staging python app.py
+[DEBUG MODE] Verbose logs enabled
+Connecting to DB: postgresql://staging_user:****@staging-db:5432/staging_db
+Using API key: stag... (masked)
+
+$ APP_ENV=prod python app.py
+[PRODUCTION MODE] Logging minimal
+Connecting to DB: postgresql://prod_user:****@prod-db:5432/prod_db
+Using API key: prod... (masked)

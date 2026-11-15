@@ -1,0 +1,83 @@
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 5,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0678406,
+    "hits" : [
+      {
+        "_index" : "logs-demo",
+        "_id" : "aaepMaEBJI2uvCMN8ied",
+        "_score" : 1.0678406,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T10:42:10Z",
+          "user_id" : "U12345",
+          "message" : "payment transaction_failed",
+          "order_id" : "ORD-1001",
+          "amount" : 129.99
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "bKepMaEBJI2uvCMN8ied",
+        "_score" : 1.0678406,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T15:10:00Z",
+          "user_id" : "U33333",
+          "message" : "database_timeout_on_checkout"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "bqepMaEBJI2uvCMN8ied",
+        "_score" : 1.0678406,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T17:15:11Z",
+          "user_id" : "U22222",
+          "message" : "create_order_failed",
+          "order_id" : "ORD-1003"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "cKepMaEBJI2uvCMN8ied",
+        "_score" : 1.0678406,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T18:42:10Z",
+          "user_id" : "U77777",
+          "message" : "payment transaction_failed insufficient funds",
+          "order_id" : "ORD-1004"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "cqepMaEBJI2uvCMN8ied",
+        "_score" : 1.0678406,
+        "_source" : {
+          "service" : "auth-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T19:30:00Z",
+          "user_id" : "U11111",
+          "message" : "ldap_auth_server_unreachable"
+        }
+      }
+    ]
+  }
+}

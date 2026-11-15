@@ -1,0 +1,33 @@
+# ==============================================================================
+# DEVOP2 - Unit 03 - Application configuration (P03) in Docker
+# ==============================================================================
+# The only service is the toolbox (python + pyyaml + python-dotenv): no Python
+# and no venv on the host.
+#   ./start.sh
+#   docker compose exec tools python app.py                    # dev (default)
+#   docker compose exec -e APP_ENV=staging tools python app.py
+#   docker compose exec -e APP_ENV=prod    tools python app.py
+#   docker compose exec tools ./test_p03.sh
+#   docker compose down
+# No port is published. Health: HEALTHCHECK of ../docker/Dockerfile.
+# ==============================================================================
+services:
+  tools:
+    build:
+      context: ../docker
+    image: devop2-tools:1.0
+    healthcheck:
+      # same test as the HEALTHCHECK of ../docker/Dockerfile, repeated here so
+      # that "docker compose config" shows a healthcheck for every service
+      test:
+        - "CMD-SHELL"
+        - "python -c 'import yaml, dotenv, pymongo' && git --version >/dev/null && gh --version >/dev/null && curl --version >/dev/null || exit 1"
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    init: true
+    restart: unless-stopped
+    working_dir: /work/Unit03
+    volumes:
+      - ..:/work

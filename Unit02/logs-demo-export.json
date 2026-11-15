@@ -1,0 +1,211 @@
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 15,
+      "relation" : "eq"
+    },
+    "max_score" : 1.0,
+    "hits" : [
+      {
+        "_index" : "logs-demo",
+        "_id" : "Z6epMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "auth-api",
+          "level" : "INFO",
+          "@timestamp" : "2026-10-12T08:12:21Z",
+          "user_id" : "U99999",
+          "message" : "login_success",
+          "ip" : "192.168.1.10"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "aKepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "WARN",
+          "@timestamp" : "2026-10-12T09:05:03Z",
+          "user_id" : "U12345",
+          "message" : "create_order_retry",
+          "order_id" : "ORD-1001"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "aaepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T10:42:10Z",
+          "user_id" : "U12345",
+          "message" : "payment transaction_failed",
+          "order_id" : "ORD-1001",
+          "amount" : 129.99
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "aqepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "INFO",
+          "@timestamp" : "2026-10-12T12:01:55Z",
+          "user_id" : "U12345",
+          "message" : "payment transaction_retry",
+          "order_id" : "ORD-1001"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "a6epMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "auth-api",
+          "level" : "WARN",
+          "@timestamp" : "2026-10-12T14:30:44Z",
+          "user_id" : "U88888",
+          "message" : "login_bruteforce_detected",
+          "attempts" : 7
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "bKepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T15:10:00Z",
+          "user_id" : "U33333",
+          "message" : "database_timeout_on_checkout"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "baepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "INFO",
+          "@timestamp" : "2026-10-12T16:00:02Z",
+          "user_id" : "U44444",
+          "message" : "order_created",
+          "order_id" : "ORD-1002"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "bqepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T17:15:11Z",
+          "user_id" : "U22222",
+          "message" : "create_order_failed",
+          "order_id" : "ORD-1003"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "b6epMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "auth-api",
+          "level" : "INFO",
+          "@timestamp" : "2026-10-12T18:02:39Z",
+          "user_id" : "U12345",
+          "message" : "logout_successful"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "cKepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T18:42:10Z",
+          "user_id" : "U77777",
+          "message" : "payment transaction_failed insufficient funds",
+          "order_id" : "ORD-1004"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "caepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "WARN",
+          "@timestamp" : "2026-10-12T19:05:40Z",
+          "user_id" : "U12345",
+          "message" : "payment gateway latency high",
+          "p95_ms" : 910
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "cqepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "auth-api",
+          "level" : "ERROR",
+          "@timestamp" : "2026-10-12T19:30:00Z",
+          "user_id" : "U11111",
+          "message" : "ldap_auth_server_unreachable"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "c6epMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "orders-api",
+          "level" : "INFO",
+          "@timestamp" : "2026-10-12T20:00:00Z",
+          "user_id" : "U55555",
+          "message" : "order_shipped",
+          "order_id" : "ORD-1001"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "dKepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "payment-api",
+          "level" : "INFO",
+          "@timestamp" : "2026-10-12T20:15:00Z",
+          "user_id" : "U66666",
+          "message" : "refund_processed",
+          "order_id" : "ORD-999"
+        }
+      },
+      {
+        "_index" : "logs-demo",
+        "_id" : "daepMaEBJI2uvCMN8ied",
+        "_score" : 1.0,
+        "_source" : {
+          "service" : "auth-api",
+          "level" : "WARN",
+          "@timestamp" : "2026-10-12T20:30:00Z",
+          "user_id" : "U12345",
+          "message" : "expired_jwt_refresh_requested"
+        }
+      }
+    ]
+  }
+}

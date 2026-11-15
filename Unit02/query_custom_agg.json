@@ -1,0 +1,38 @@
+{
+  "took" : 1,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 15,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "top_services" : {
+      "doc_count_error_upper_bound" : 0,
+      "sum_other_doc_count" : 0,
+      "buckets" : [
+        {
+          "key" : "auth-api",
+          "doc_count" : 5
+        },
+        {
+          "key" : "orders-api",
+          "doc_count" : 5
+        },
+        {
+          "key" : "payment-api",
+          "doc_count" : 5
+        }
+      ]
+    }
+  }
+}

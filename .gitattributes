@@ -1,0 +1,10 @@
+# Files executed or read inside Linux containers must keep LF line endings,
+# even when the repository is cloned on Windows (core.autocrlf).
+*.sh        text eol=lf
+*.js        text eol=lf
+*.py        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.ndjson    text eol=lf
+Dockerfile  text eol=lf
+.env.example text eol=lf

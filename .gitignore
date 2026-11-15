@@ -1,0 +1,66 @@
+# ==============================================================================
+# DEVOP2 - EXERCISES - the ONLY .gitignore of the repository
+# (the former Unit01/02/03 .gitignore files were merged here on 2026-11-15)
+# ==============================================================================
+
+# --- 1. Secrets: never commit credentials -------------------------------------
+.env
+.env.*
+!.env.example
+certs/
+*.crt
+*.key
+*.pem
+*.p12
+
+# --- 2. Old files that still contain clear-text passwords ---------------------
+.backup_*/
+Unit02.zip
+yml1__
+docker-compose.yml__
+
+# --- 3. Local tools, generated data, lab repositories -------------------------
+Unit01/mongosh-*/
+mongo_data/
+es_data/
+kibana_data/
+Unit02/data/
+**/venv/
+__pycache__/
+*.log
+*.zip
+_to_delete/
+# repositories created while doing the labs (they have their own remote)
+Unit04/release-strategies-lab/
+Unit05/TestProj/
+Unit05/rollback-lab/
+
+# --- 4. Editor / OS noise ------------------------------------------------------
+*.wbk
+~$*
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# --- 5. Course material: only my own work goes to GitHub, not the course -------
+# Every PDF / PowerPoint / Word file is ignored (lab handouts, theory, slides).
+# Exceptions: the documents I wrote myself.
+*.pdf
+*.pptx
+*.docx
+!Unit01/Unit 01 - API Basics.docx
+!Unit02/Elasticsearch.docx
+!**/P0*_DELIVERABLE.pdf
+!**/P0*_DELIVERABLE.docx
+
+# --- 6. Drafts and duplicates (list of 2026-11-15) -----------------------------
+# Remove a line if you want the file in the repository.
+main.py
+pip_install.txt
+Unit01/todo-docker.sh
+Unit02/LISEZMOI.md
+Unit03/term
+Unit04/GitKarken.txt
+Unit05/MyTestUnit5.sh

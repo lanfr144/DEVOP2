@@ -1,0 +1,156 @@
+# ==============================================================================
+# DEVOP2 - Unit 01 - MongoDB + Mongo Express (P01 Part 1 + Part 3 bonus)
+# ==============================================================================
+# Usage:
+#   ./start.sh                  # .env check + host-port check + up --wait
+#   (or by hand: cp .env.example .env ; docker compose up -d --build --wait)
+#   docker compose config -q    # validate this file (no output = OK)
+#   docker compose ps           # both services must show "(healthy)"
+#   ./test_p01.sh               # automated test of the whole deliverable
+#
+# Secrets: every password comes from .env (PASSWORD_* variables).
+# The .env file is listed in .gitignore; .env.example holds dummy values only.
+#
+# Note: the `version:` attribute is obsolete with Docker Compose v2 and was
+# removed (docker compose config prints a warning when it is present).
+# ==============================================================================
+
+networks:
+  mongo_net:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local
+
+services:
+  # ============================================================================
+  # MongoDB Database Engine
+  # ============================================================================
+  mongo:
+    image: mongo:7
+    # Container names can be overridden (used by test_p01.sh to run an isolated
+    # test stack next to the real one). Defaults keep the original names.
+    container_name: ${MONGO_CONTAINER_NAME:-mongodb_service}
+    restart: unless-stopped
+    networks:
+      - mongo_net
+
+    # Port mapping: Parameterized Host:Container ports
+    ports:
+      - "127.0.0.1:${MONGO_HOST_PORT}:${MONGO_CONTAINER_PORT}"
+
+    # Database Initialization & Access Credentials (values come from .env)
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${PASSWORD_MONGO_ROOT}
+
+    volumes:
+      # Data Persistence
+      - mongo_data:/data/db
+      # Seeding: on the FIRST start (empty volume) MongoDB runs every *.js file
+      # of /docker-entrypoint-initdb.d. The script loads logs.ndjson into
+      # unit01.logs with real Date timestamps, so the queries are never empty.
+      # If the volume already exists, run ./load_logs.sh instead (idempotent).
+      - ./init/01-seed-logs.js:/docker-entrypoint-initdb.d/01-seed-logs.js:ro
+      - ./logs.ndjson:/seed/logs.ndjson:ro
+
+    # Health Check: Validates Mongo is ready to accept commands before dependent services boot
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - "mongosh -u $${MONGO_INITDB_ROOT_USERNAME} -p $${MONGO_INITDB_ROOT_PASSWORD} --eval 'db.adminCommand(\"ping\")' --quiet"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+    # High-level Resource Management (Optional: avoids container starving the host)
+    deploy:
+      resources:
+        limits:
+          cpus: "2.00"
+          memory: 2G
+        reservations:
+          cpus: "0.25"
+          memory: 512M
+
+  # ============================================================================
+  # Mongo Express - Web-based Administrative GUI
+  # ============================================================================
+  mongo-express:
+    image: mongo-express:1
+    container_name: ${EXPRESS_CONTAINER_NAME:-mongo_express_ui}
+    restart: unless-stopped
+    networks:
+      - mongo_net
+
+    # Port mapping: Parameterized Web UI Host:Container ports
+    ports:
+      - "127.0.0.1:${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}"
+
+    # Connection String & Authentication Settings
+    environment:
+      # Connection to internal Docker network using MongoDB internal port (default: 27017)
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USER}:${PASSWORD_MONGO_ROOT}@mongo:${MONGO_CONTAINER_PORT}/?authSource=admin
+      # Basic Auth protection for the Express Web Interface
+      ME_CONFIG_BASICAUTH_USERNAME: ${EXPRESS_BASICAUTH_USER}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${PASSWORD_EXPRESS_BASICAUTH}
+
+    # Strict Startup Ordering: Wait until MongoDB passes its healthcheck
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+    # Health Check: Ensures the HTTP server is serving traffic.
+    # Fixed 2026-10-26: the old test called http://localhost:... -> BusyBox wget
+    # resolved "localhost" to IPv6 ::1 while mongo-express listens on IPv4 only,
+    # so the container was always "unhealthy". 127.0.0.1 forces IPv4, and
+    # /status is the only page that answers without Basic Auth (no 401).
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - "wget -q --spider http://127.0.0.1:${EXPRESS_CONTAINER_PORT}/status || exit 1"
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # Toolbox - prerequisites of the exercise (python + pymongo, curl)
+  # ============================================================================
+  # Nothing is installed on the host: run the tools inside this container.
+  #   docker compose exec tools python log_to_mongo.py
+  # mongosh itself is in the mongo container:
+  #   docker compose exec mongo mongosh -u admin -p --authenticationDatabase admin unit01
+  # The image (../docker/Dockerfile) carries its own HEALTHCHECK.
+  tools:
+    build:
+      context: ../docker
+    image: devop2-tools:1.0
+    healthcheck:
+      # same test as the HEALTHCHECK of ../docker/Dockerfile, repeated here so
+      # that "docker compose config" shows a healthcheck for every service
+      test:
+        - "CMD-SHELL"
+        - "python -c 'import yaml, dotenv, pymongo' && git --version >/dev/null && gh --version >/dev/null && curl --version >/dev/null || exit 1"
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    init: true
+    restart: unless-stopped
+    networks:
+      - mongo_net
+    working_dir: /work/Unit01
+    volumes:
+      - ..:/work
+    environment:
+      # Inside the Docker network: service name + container port (not the host port)
+      MONGO_HOST: mongo
+      MONGO_HOST_PORT: ${MONGO_CONTAINER_PORT}
+      MONGO_ROOT_USER: ${MONGO_ROOT_USER}
+      PASSWORD_MONGO_ROOT: ${PASSWORD_MONGO_ROOT}
+    depends_on:
+      mongo:
+        condition: service_healthy

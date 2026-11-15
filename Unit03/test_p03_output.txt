@@ -1,0 +1,26 @@
+=== P03 test - 2026-10-26T19:11:09Z - Python 3.12.11
+PASS  1 config.yaml: 3 environments x (DB_URL, API_KEY, DEBUG), 2-space indent, lowercase booleans
+      # DEVOP2 Unit 03 - output of app.py in the 3 environments (2026-10-26)
+      
+      $ APP_ENV=dev python app.py
+      [DEBUG MODE] Verbose logs enabled
+      Connecting to DB: postgresql://dev_user:****@localhost:5432/dev_db
+      Using API key: dev-... (masked)
+      
+      $ APP_ENV=staging python app.py
+      [DEBUG MODE] Verbose logs enabled
+      Connecting to DB: postgresql://staging_user:****@staging-db:5432/staging_db
+      Using API key: stag... (masked)
+      
+      $ APP_ENV=prod python app.py
+      [PRODUCTION MODE] Logging minimal
+      Connecting to DB: postgresql://prod_user:****@prod-db:5432/prod_db
+      Using API key: prod... (masked)
+PASS  2 app.py: DEBUG in dev+staging, PRODUCTION in prod, password and API key masked
+PASS  3 APP_ENV=qa -> ValueError: Invalid APP_ENV: qa. Choose from ['dev', 'staging', 'prod']
+PASS  4 APP_ENV=PROD accepted (lower-cased)
+PASS  5 config_bad.yaml rejected: yaml.scanner.ScannerError: while scanning a simple key (API_KEY= instead of API_KEY:)
+PASS  6 validated loader: KeyError: "Missing required keys: ['API_KEY']"
+PASS  7 loader_env.py: dev/staging True, prod False, bad (DEBUG=TRUE) True
+PASS  8 .env.* git-ignored, .env.example versioned
+=== ALL TESTS PASSED

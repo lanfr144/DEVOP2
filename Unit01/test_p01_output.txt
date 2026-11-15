@@ -1,0 +1,69 @@
+=== P01 test - 2026-10-26T19:01:59Z
+PASS  1 docker-compose.yml valid (no obsolete version attribute)
+PASS  2 no secret outside .env; .env git-ignored; .env.example present
+PASS  3 test stack started, mongo + mongo-express healthy
+unit01test_express: Up 6 seconds (healthy)
+unit01test_mongo: Up 18 seconds (healthy)
+PASS  4 seed ran on first start: 10 documents, 10 with a Date timestamp
+      seed: 10 lines read, 0 inserted, 10 already present; unit01.logs now holds 10 documents
+PASS  5 load_logs.sh idempotent (still 10 documents)
+      Q1 - ERROR count between 2025-09-17T10:00:00.000Z and 2025-09-18T10:00:00.000Z
+      3
+      [
+        {
+          service: 'payment-api',
+          action: 'transaction_failed',
+          timestamp: ISODate('2025-09-17T10:42:10.000Z')
+        },
+        {
+          service: 'orders-api',
+          action: 'create_order_failed',
+          timestamp: ISODate('2025-09-18T06:15:11.000Z')
+        },
+        {
+          service: 'payment-api',
+          action: 'transaction_failed',
+          timestamp: ISODate('2025-09-18T07:42:10.000Z')
+        }
+      ]
+      Q2 - actions of user U12345
+      [
+        {
+          service: 'orders-api',
+          action: 'create_order_retry',
+          timestamp: ISODate('2025-09-17T09:05:03.000Z')
+        },
+        {
+          service: 'payment-api',
+          action: 'transaction_failed',
+          timestamp: ISODate('2025-09-17T10:42:10.000Z')
+        },
+        {
+          service: 'payment-api',
+          action: 'transaction_retry',
+          timestamp: ISODate('2025-09-17T12:01:55.000Z')
+        },
+        {
+          service: 'auth-api',
+          action: 'logout',
+          timestamp: ISODate('2025-09-18T07:02:39.000Z')
+        },
+        {
+          service: 'payment-api',
+          action: 'transaction_latency_high',
+          timestamp: ISODate('2025-09-18T08:05:40.000Z')
+        }
+      ]
+      Q3 - distinct services with WARN
+      [
+        'auth-api',
+        'orders-api',
+        'payment-api'
+      ]
+      RESULT q1=3 q2=5 q3=auth-api,orders-api,payment-api
+PASS  6 queries: ERROR/24h=3, U12345=5 actions, WARN services=3
+PASS  7 mongo-express: /status=200, / without login=401 (Basic Auth active)
+      demo-logger: 3 log documents written to unit01.logs
+PASS  8 log_to_mongo.py wrote 3 logs (Date timestamps); Q3 now sees demo-logger
+=== ALL TESTS PASSED
+--- cleanup: removing the test stack and its volume

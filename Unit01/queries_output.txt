@@ -1,0 +1,54 @@
+Q1 - ERROR count between 2025-09-17T10:00:00.000Z and 2025-09-18T10:00:00.000Z
+3
+[
+  {
+    timestamp: ISODate('2025-09-17T10:42:10.000Z'),
+    service: 'payment-api',
+    action: 'transaction_failed'
+  },
+  {
+    action: 'create_order_failed',
+    service: 'orders-api',
+    timestamp: ISODate('2025-09-18T06:15:11.000Z')
+  },
+  {
+    action: 'transaction_failed',
+    service: 'payment-api',
+    timestamp: ISODate('2025-09-18T07:42:10.000Z')
+  }
+]
+Q2 - actions of user U12345
+[
+  {
+    timestamp: ISODate('2025-09-17T09:05:03.000Z'),
+    service: 'orders-api',
+    action: 'create_order_retry'
+  },
+  {
+    timestamp: ISODate('2025-09-17T10:42:10.000Z'),
+    service: 'payment-api',
+    action: 'transaction_failed'
+  },
+  {
+    timestamp: ISODate('2025-09-17T12:01:55.000Z'),
+    service: 'payment-api',
+    action: 'transaction_retry'
+  },
+  {
+    action: 'logout',
+    service: 'auth-api',
+    timestamp: ISODate('2025-09-18T07:02:39.000Z')
+  },
+  {
+    action: 'transaction_latency_high',
+    service: 'payment-api',
+    timestamp: ISODate('2025-09-18T08:05:40.000Z')
+  }
+]
+Q3 - distinct services with WARN
+[
+  'auth-api',
+  'orders-api',
+  'payment-api'
+]
+RESULT q1=3 q2=5 q3=auth-api,orders-api,payment-api
