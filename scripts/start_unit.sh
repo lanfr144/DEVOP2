@@ -8,6 +8,10 @@
 #   2. ports     every host port of .env must be free (skipped if already running)
 #   3. start     docker compose up -d --build --wait  -> returns when every
 #                healthcheck (services + toolbox image) is "healthy"
+#                If the start fails: prints a diagnosis (state, healthcheck
+#                results, last log lines, networks), then stops and removes
+#                every container of the unit (docker compose down; volumes
+#                are kept). KEEP_ON_FAILURE=1 leaves them running.
 #   4. hint      prints the commands to type next (NEXT_STEPS, set by start.sh;
 #                {tools} is replaced by the real name of the tools container)
 # ==============================================================================
@@ -87,7 +91,48 @@ fi
 
 # --- 3. start ----------------------------------------------------------------
 echo "--- starting (waits for every healthcheck)"
-docker compose up -d --build --wait
+if ! docker compose up -d --build --wait; then
+  # Say WHY: state of every container, then for each one that is not healthy
+  # the output of its last healthchecks and the end of its log.
+  echo
+  echo "=== The stack did not become healthy. Diagnosis:"
+  docker compose ps -a --format 'table {{.Service}}\t{{.Name}}\t{{.Status}}' || true
+  for name in $(docker compose ps -a --format '{{.Name}}'); do
+    health=$(docker inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}' "$name" 2>/dev/null || echo unknown)
+    state=$(docker inspect -f '{{.State.Status}}' "$name" 2>/dev/null || echo unknown)
+    if [ "$health" = healthy ] || { [ "$health" = none ] && [ "$state" = running -o "$state" = exited ]; }; then continue; fi
+    echo
+    echo "--- $name: state=$state health=$health"
+    echo "    last healthcheck results:"
+    docker inspect -f '{{range .State.Health.Log}}exit={{.ExitCode}} {{.Output}}{{println}}{{end}}' "$name" 2>/dev/null | tail -6 | sed 's/^/      /'
+    echo "    last log lines:"
+    docker logs --tail 25 "$name" 2>&1 | sed 's/^/      /'
+  done
+  echo
+  echo "--- networks of this unit (subnet | container=address)"
+  for net in $(docker network ls -q --filter "label=com.docker.compose.project=$(docker compose config --format json 2>/dev/null | sed -n 's/^ *"name": *"\([^"]*\)".*/\1/p' | head -1)" 2>/dev/null); do
+    docker network inspect "$net" -f '    {{.Name}}: {{range .IPAM.Config}}{{.Subnet}}{{end}} | {{range .Containers}}{{.Name}}={{.IPv4Address}} {{end}}' 2>/dev/null || true
+  done
+
+  echo
+  echo "If a log above says \"Operation timed out\" between two containers, old Docker"
+  echo "firewall rules may be blocking the network:  ../scripts/fix_docker_stale_rules.sh"
+
+  # A half-started stack is never left running: everything of this unit is
+  # stopped and removed (containers and network; the data volumes are kept).
+  # Set KEEP_ON_FAILURE=1 to leave it up for a manual investigation.
+  echo
+  if [ "${KEEP_ON_FAILURE:-0}" = "1" ]; then
+    echo "KEEP_ON_FAILURE=1: the containers are left running for investigation."
+    echo "Stop them with:  docker compose down"
+  else
+    echo "--- stopping everything of this unit (volumes are kept)"
+    docker compose down --remove-orphans || true
+  fi
+  echo
+  echo "Fix the cause shown above, then run ./start.sh again."
+  exit 1
+fi
 docker compose ps --format 'table {{.Service}}\t{{.Status}}\t{{.Ports}}'
 
 # --- 4. what to type next ----------------------------------------------------

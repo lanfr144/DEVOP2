@@ -7,7 +7,7 @@ Le détail des corrections du 26/10 (P01 à P03) reste dans `PLAN.md`.
 
 | Unité | Sujet | État | Reste à faire |
 |---|---|---|---|
-| 01-A | Frise « un jalon DevOps » (1 page) | 🟡 texte rédigé (`Unit01/P01A_DEVOPS_MILESTONE.md`) | Relire, exporter en PDF ou Word, préparer l'oral de 5 minutes |
+| 01-A | Frise « un jalon DevOps » (1 page) | 🟡 PDF rédigé (`Unit01/P01A_DELIVERABLE.pdf`) | Relire `Unit01/P01A_DELIVERABLE.pdf`, préparer l'oral de 5 minutes |
 | 01-B | Logs dans MongoDB (P01) | ✅ fait, testé 8/8 | Rien |
 | 01 | API Basics (HTTP, JSON, gRPC) | ✅ réponses dans le docx | Corriger une réponse (voir §3) |
 | 02 | Elasticsearch + Kibana (P02) | ✅ fait, dashboard à 4 panneaux capturé | Relancer `./test_p02.sh` pour mettre à jour sa sortie |
@@ -36,6 +36,7 @@ docker compose down   # arrêter
 ```
 
 - **`.env` et `.env.example`** : `.env.example` est le modèle versionné (valeurs factices). `./start.sh` le copie en `.env` s'il manque. Unités 01 et 02 : il s'arrête pour que tu mettes tes mots de passe. Unités 04 et 05 : il remplit `GIT_USER_NAME`, `GIT_USER_EMAIL` et `GH_TOKEN` depuis la machine (`git config --global`, `gh auth token`) et dit ce qui manque. `.env` ne part jamais dans Git.
+- **Si le démarrage échoue** : `./start.sh` affiche un diagnostic (état, contrôles de santé, fin des journaux, réseaux), puis arrête et supprime tous les conteneurs de l'unité (`docker compose down`, les données sont gardées). `KEEP_ON_FAILURE=1 ./start.sh` les laisse tourner pour enquêter.
 - **Suite** : à la fin, `./start.sh` affiche les commandes à taper (par exemple `docker exec -it unit05-tools-1 bash` puis `./TestUnit5.sh`).
 - **Ports** : tous les ports côté machine viennent de `.env` (`MONGO_HOST_PORT`, `EXPRESS_HOST_PORT`, `ES_PORT_EXPOSE`, `ES_TRANSPORT_PORT_EXPOSE`, `KIBANA_PORT_EXPOSE`). Avant de démarrer, `scripts/check_ports.sh` vérifie que chacun est libre ; sinon il nomme la variable à changer dans `.env` et rien n'est lancé. Les ports sont publiés sur `127.0.0.1` seulement.
 - **Healthchecks** : chaque service en a un (mongo, mongo-express, elasticsearch, kibana, tools), et l'image `devop2-tools` a son `HEALTHCHECK` dans le Dockerfile. `up --wait` ne rend la main que lorsque tout est « healthy ».

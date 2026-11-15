@@ -111,10 +111,15 @@ services:
       test:
         - "CMD-SHELL"
         - "wget -q --spider http://127.0.0.1:${EXPRESS_CONTAINER_PORT}/status || exit 1"
-      interval: 15s
+      # Changed 2026-11-15: with start_period 10s and 3 retries the container
+      # was declared "unhealthy" after ~45 s, before mongo-express had finished
+      # starting on a busy machine. A failed check does not count during
+      # start_period, and the first success makes the container healthy at
+      # once, so a longer start_period costs nothing when the start is fast.
+      interval: 10s
       timeout: 5s
-      retries: 3
-      start_period: 10s
+      retries: 6
+      start_period: 90s
 
   # ============================================================================
   # Toolbox - prerequisites of the exercise (python + pymongo, curl)

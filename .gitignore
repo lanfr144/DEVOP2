@@ -59,7 +59,6 @@ Desktop.ini
 # Remove a line if you want the file in the repository.
 main.py
 pip_install.txt
-Unit01/todo-docker.sh
 Unit02/LISEZMOI.md
 Unit03/term
 Unit04/GitKarken.txt

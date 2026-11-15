@@ -1,9 +1,10 @@
-=== P01 test - 2026-10-26T19:01:59Z
+=== P01 test - 2026-11-15T17:40:46Z
 PASS  1 docker-compose.yml valid (no obsolete version attribute)
 PASS  2 no secret outside .env; .env git-ignored; .env.example present
 PASS  3 test stack started, mongo + mongo-express healthy
+unit01test-tools-1: Up 6 seconds (healthy)
 unit01test_express: Up 6 seconds (healthy)
-unit01test_mongo: Up 18 seconds (healthy)
+unit01test_mongo: Up 12 seconds (healthy)
 PASS  4 seed ran on first start: 10 documents, 10 with a Date timestamp
       seed: 10 lines read, 0 inserted, 10 already present; unit01.logs now holds 10 documents
 PASS  5 load_logs.sh idempotent (still 10 documents)
@@ -12,17 +13,17 @@ PASS  5 load_logs.sh idempotent (still 10 documents)
       [
         {
           service: 'payment-api',
-          action: 'transaction_failed',
-          timestamp: ISODate('2025-09-17T10:42:10.000Z')
+          timestamp: ISODate('2025-09-17T10:42:10.000Z'),
+          action: 'transaction_failed'
         },
         {
-          service: 'orders-api',
           action: 'create_order_failed',
+          service: 'orders-api',
           timestamp: ISODate('2025-09-18T06:15:11.000Z')
         },
         {
-          service: 'payment-api',
           action: 'transaction_failed',
+          service: 'payment-api',
           timestamp: ISODate('2025-09-18T07:42:10.000Z')
         }
       ]
@@ -30,27 +31,27 @@ PASS  5 load_logs.sh idempotent (still 10 documents)
       [
         {
           service: 'orders-api',
-          action: 'create_order_retry',
-          timestamp: ISODate('2025-09-17T09:05:03.000Z')
+          timestamp: ISODate('2025-09-17T09:05:03.000Z'),
+          action: 'create_order_retry'
         },
         {
           service: 'payment-api',
-          action: 'transaction_failed',
-          timestamp: ISODate('2025-09-17T10:42:10.000Z')
+          timestamp: ISODate('2025-09-17T10:42:10.000Z'),
+          action: 'transaction_failed'
         },
         {
           service: 'payment-api',
-          action: 'transaction_retry',
-          timestamp: ISODate('2025-09-17T12:01:55.000Z')
+          timestamp: ISODate('2025-09-17T12:01:55.000Z'),
+          action: 'transaction_retry'
         },
         {
-          service: 'auth-api',
           action: 'logout',
+          service: 'auth-api',
           timestamp: ISODate('2025-09-18T07:02:39.000Z')
         },
         {
-          service: 'payment-api',
           action: 'transaction_latency_high',
+          service: 'payment-api',
           timestamp: ISODate('2025-09-18T08:05:40.000Z')
         }
       ]

@@ -11,6 +11,9 @@ Version numbers have three digits, `MAJOR.MINOR.PATCH` (for example `1.0.0`):
 A higher digit resets the lower ones to 0. Each version is a Git tag (`v1.0.0`); a published tag is never moved.
 New version: `./scripts/release.sh major|minor|patch "what changed"`.
 
+## v1.2.0 - 2026-11-15
+- Unit 01: Docker start checks, no clear-text password, refreshed test output
+
 ## v1.1.0 - 2026-11-15
 - Unit 01 milestone text, line endings, verification sheets
 

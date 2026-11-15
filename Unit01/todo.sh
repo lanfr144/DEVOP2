@@ -3,14 +3,17 @@
 # It is read from .env (ignored by Git, see .gitignore); copy .env.example to
 # .env and set PASSWORD_MONGO_ROOT there.
 set -a; . "$(dirname "$0")/.env"; set +a
-export your_password="${PASSWORD_MONGO_ROOT:?PASSWORD_MONGO_ROOT missing in .env}"
+# The password is handed to Docker through the environment (-e NAME, no value):
+# it never appears on a command line. Inside the container, mongosh and
+# mongoimport read it from MONGO_INITDB_ROOT_PASSWORD.
+export MONGO_INITDB_ROOT_PASSWORD="${PASSWORD_MONGO_ROOT:?PASSWORD_MONGO_ROOT missing in .env}"
 docker volume create mongo_data
-docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=${your_password} -v mongo_data:/data/db mongo:7
+docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD -v mongo_data:/data/db mongo:7
 docker logs -f mongodb
-docker exec -it mongodb mongosh -u admin -p ${your_password} --authenticationDatabase admin
+docker exec -it mongodb sh -c 'mongosh -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin'
 docker cp logs.ndjson mongodb:/data/db/logs.ndjson
-docker exec -it mongodb mongoimport -u admin -p ${your_password} --authenticationDatabase admin --db unit01 --collection logs --file /tmp/logs.ndjson
-docker exec -it mongodb mongosh -u admin -p ${your_password} --authenticationDatabase admin
+docker exec -it mongodb sh -c 'mongoimport -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --db unit01 --collection logs --file /tmp/logs.ndjson'
+docker exec -it mongodb sh -c 'mongosh -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin'
 
 echo "
 //Essential shell commands
@@ -41,13 +44,12 @@ db.getCollectionNames()
 //delete the database
 " | grep -v '#' | mongosh
 
-#docker exec -it mongodb mongoimport --uri="mongodb://admin:${your_password}@localhost:27017/unit01" --collection=logs --file=logs.ndjson
-docker exec -it mongodb mongoimport --username "admin" --password "${your_password}" --authenticationDatabase "admin" --db unit01 --collection logs --file /data/db/logs.ndjson
-echo 2026-09-30T09:21:04.468+0000    connected to: mongodb://localhost/
-echo 2026-09-30T09:21:04.475+0000    10 document(s) imported successfully. 0 document(s) failed to import.
+docker exec -it mongodb sh -c 'mongoimport -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin --db unit01 --collection logs --file /data/db/logs.ndjson'
+echo "2026-09-30T09:21:04.468+0000    connected to: mongodb://localhost/"
+echo "2026-09-30T09:21:04.475+0000    10 document(s) imported successfully. 0 document(s) failed to import."
 
 
-docker exec -it mongodb mongosh -u admin -p ${your_password} --authenticationDatabase admin
+docker exec -it mongodb sh -c 'mongosh -u "$MONGO_INITDB_ROOT_USERNAME" -p "$MONGO_INITDB_ROOT_PASSWORD" --authenticationDatabase admin'
 
 echo "
 db = db.getSiblingDB('unit01');
