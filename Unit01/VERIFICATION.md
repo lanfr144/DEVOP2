@@ -37,5 +37,5 @@ Si `./start.sh` affiche `BUSY`, change le port indiqué dans `.env` et relance.
 
 ## 4. Ce qui manque
 
-- La frise « un jalon DevOps » (exercice A, 1 page, 300 à 350 mots) n'est pas dans le dossier.
+- La frise « un jalon DevOps » (exercice A) est rédigée dans `P01A_DEVOPS_MILESTONE.md` : à relire, à exporter en PDF ou Word, et à préparer pour le résumé oral de 5 minutes.
 - `todo.sh` est un brouillon de notes : à retirer si tu ne veux pas qu'il soit publié.

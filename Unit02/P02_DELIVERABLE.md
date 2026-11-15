@@ -16,7 +16,7 @@ Detailed walkthrough (commands and screenshots): `Elasticsearch.docx`.
 | `logs-demo-export.json` | Part A, index export (15 documents) |
 | `kibana/p02-dashboard.ndjson` + `kibana/create_dashboard.sh` | Part B: data view + 4 Lens + dashboard, as code |
 | `test_p02.sh` / `test_p02_output.txt` | Automated test (10 checks, all PASS) |
-| `dashboard.png` | **To add:** dashboard screenshot (manual step, see below) |
+| `dashboard.png` | Dashboard screenshot (2026-11-15): four panels with data |
 
 ## Part A – Elasticsearch
 

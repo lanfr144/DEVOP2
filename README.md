@@ -7,10 +7,10 @@ Le détail des corrections du 26/10 (P01 à P03) reste dans `PLAN.md`.
 
 | Unité | Sujet | État | Reste à faire |
 |---|---|---|---|
-| 01-A | Frise « un jalon DevOps » (1 page) | ❌ introuvable dans le dossier | Écrire la page (ou la copier ici si elle a déjà été rendue) |
+| 01-A | Frise « un jalon DevOps » (1 page) | 🟡 texte rédigé (`Unit01/P01A_DEVOPS_MILESTONE.md`) | Relire, exporter en PDF ou Word, préparer l'oral de 5 minutes |
 | 01-B | Logs dans MongoDB (P01) | ✅ fait, testé 8/8 | Rien |
 | 01 | API Basics (HTTP, JSON, gRPC) | ✅ réponses dans le docx | Corriger une réponse (voir §3) |
-| 02 | Elasticsearch + Kibana (P02) | 🟡 fait, testé 10/10 | Capture d'écran du dashboard, remplacer `LISEZMOI.md` |
+| 02 | Elasticsearch + Kibana (P02) | ✅ fait, dashboard à 4 panneaux capturé | Relancer `./test_p02.sh` pour mettre à jour sa sortie |
 | 03 | Configuration par environnement (P03) | ✅ fait, testé 8/8 | Rien (`config.yaml` est suivi par Git depuis le 15/11) |
 | 04b | Release management (P04) | ❌ pas fait | Tout le labo + le document de réponses |
 | 04c | GitKraken (optionnel) | ❌ pas fait | Capture du graphe, lien de branche, 2 phrases |

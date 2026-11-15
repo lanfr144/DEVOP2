@@ -28,7 +28,7 @@ Dans le navigateur, <http://localhost:5602/app/dashboards#/view/p02-dashboard> (
 | P02 - Errors by service | barres dont le total fait 5 |
 | P02 - Logs over time | barres réparties sur la journée du 12/10/2026 |
 
-Si un panneau affiche une erreur : *Edit* sur le panneau, corriger dans Lens, *Save and return*. Les deux derniers panneaux ont été ajoutés le 15/11 et n'ont pas encore été vus dans Kibana.
+Si un panneau affiche une erreur : *Edit* sur le panneau, corriger dans Lens, *Save and return*. Les quatre panneaux ont été vus remplis le 15/11 (voir `dashboard.png`).
 
 Dans *Discover* : période « Last 1 year », requête `level : "ERROR"` → 5 documents.
 
@@ -37,7 +37,7 @@ Dans *Discover* : période « Last 1 year », requête `level : "ERROR"` → 5 d
 | Fichier | Ce qu'il faut y vérifier |
 |---|---|
 | `P02_DELIVERABLE.md` | **le livrable** : comparaison Unit 01 / Unit 02 (4 à 6 phrases), description des parties A et B |
-| `dashboard.png` | **manquant** : capture du dashboard avec ses panneaux remplis (`Win + Shift + S`) |
+| `dashboard.png` | capture du dashboard : les quatre panneaux sont remplis (INFO 6, ERROR 5, WARN 4) |
 | `query_a_search.json`, `query_b_filter.json`, `query_c_agg_level.json`, `query_custom_agg.json` | les 4 sorties JSON ; `test_p02.sh` les compare au résultat réel |
 | `logs-demo-export.json` | 15 documents |
 | `docker-compose.yml` | aucun mot de passe ni jeton en clair ; ports sur `127.0.0.1` ; Kibana se connecte avec `kibana_system` |
@@ -46,5 +46,4 @@ Dans *Discover* : période « Last 1 year », requête `level : "ERROR"` → 5 d
 
 ## 4. Ce qui manque
 
-- `dashboard.png` (4 points sur 20 portent sur la data view et le dashboard).
 - `LISEZMOI.md` est une copie de celui de l'unité 03 (exclu de Git) : à supprimer.

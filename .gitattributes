@@ -1,10 +1,44 @@
-# Files executed or read inside Linux containers must keep LF line endings,
-# even when the repository is cloned on Windows (core.autocrlf).
-*.sh        text eol=lf
-*.js        text eol=lf
-*.py        text eol=lf
-*.yml       text eol=lf
-*.yaml      text eol=lf
-*.ndjson    text eol=lf
-Dockerfile  text eol=lf
-.env.example text eol=lf
+# ==============================================================================
+# DEVOP2 - EXERCISES - line endings (the only .gitattributes of the repository)
+# ==============================================================================
+# Windows ends a line with CRLF (\r\n), Linux with LF (\n). The scripts of this
+# repository run inside Linux containers: a CRLF there breaks them
+# ("bad interpreter", "$'\r': command not found").
+#
+# Rule: every text file is stored AND checked out with LF, on every machine,
+# whatever core.autocrlf says. Binary files are never touched.
+# ==============================================================================
+
+# Default: Git detects text files and normalises them to LF
+* text=auto eol=lf
+
+# Text files, always LF (explicit, so detection can never get them wrong)
+*.sh          text eol=lf
+*.py          text eol=lf
+*.js          text eol=lf
+*.json        text eol=lf
+*.ndjson      text eol=lf
+*.yml         text eol=lf
+*.yaml        text eol=lf
+*.md          text eol=lf
+*.txt         text eol=lf
+Dockerfile    text eol=lf
+.env.example  text eol=lf
+.gitignore    text eol=lf
+.gitattributes text eol=lf
+VERSION       text eol=lf
+
+# Windows-only scripts keep CRLF
+*.bat         text eol=crlf
+*.cmd         text eol=crlf
+*.ps1         text eol=crlf
+
+# Binary files: no conversion, no text diff
+*.docx  binary
+*.xlsx  binary
+*.pptx  binary
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.zip   binary
