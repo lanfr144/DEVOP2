@@ -60,11 +60,14 @@ Quick check: `python -c "import yaml; yaml.safe_load(open('config_bad.yaml'))"`.
 
 ## Installation and test
 
+Nothing to install on the machine: Python, pyyaml and python-dotenv are in the `tools` container.
+
 ```bash
-python -m venv venv && source venv/bin/activate
-pip install pyyaml python-dotenv
-./test_p03.sh 2>&1 | tee test_p03_output.txt
+./start.sh                                   # builds and starts the container
+docker compose exec tools ./test_p03.sh 2>&1 | tee test_p03_output.txt
 ```
+
+The `.env.dev`, `.env.staging`, `.env.prod` and `.env.bad` files used by check 7 are not in Git: create them from `.env.example` on a fresh clone.
 
 Result on 2026-10-26: **ALL TESTS PASSED** (8 checks).
 
