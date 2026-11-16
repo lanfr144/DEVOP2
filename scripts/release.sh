@@ -2,10 +2,10 @@
 # ==============================================================================
 # DEVOP2 - publish a new version of the repository (MAJOR.MINOR.PATCH)
 # ==============================================================================
-# Usage:  ./scripts/release.sh major|minor|patch "what changed"
-#   major = big change      1.4.2 -> 2.0.0
-#   minor = medium change   1.4.2 -> 1.5.0
-#   patch = minor change    1.4.2 -> 1.4.3
+# Usage:  ./scripts/release.sh next-unit|same-unit|fix "what changed"
+#   next-unit (or major) = the work moves on to the next unit   1.4.1 -> 2.0.0
+#   same-unit (or minor) = a change inside the same unit        2.0.0 -> 2.1.0
+#   fix       (or patch) = a small fix                          2.1.0 -> 2.1.1
 # It updates VERSION and CHANGELOG.md, commits everything, creates the
 # annotated tag vX.Y.Z and pushes the branch and the tag when a remote exists.
 # ==============================================================================
@@ -13,7 +13,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 level="${1:-}"; message="${2:-}"
-case "$level" in major|minor|patch) ;; *) echo "Usage: $0 major|minor|patch \"what changed\"" >&2; exit 1 ;; esac
+case "$level" in
+  next-unit|major) level=major ;;
+  same-unit|minor) level=minor ;;
+  fix|patch)       level=patch ;;
+  *) echo "Usage: $0 next-unit|same-unit|fix \"what changed\"" >&2; exit 1 ;;
+esac
 [ -n "$message" ] || { echo "Give a short description of the change." >&2; exit 1; }
 
 current=$(tr -d ' \r\n' < VERSION)

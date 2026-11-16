@@ -1,15 +1,19 @@
 # Changelog
 
-Version numbers have three digits, `MAJOR.MINOR.PATCH` (for example `1.0.0`):
+Version numbers have three digits, `UNIT.CHANGE.FIX` (for example `2.1.0`):
 
-| Digit | When it changes | Example |
-|---|---|---|
-| 1st (MAJOR) | big change: a new unit delivered, a structure change that breaks the way the exercises are run | `1.4.2` → `2.0.0` |
-| 2nd (MINOR) | medium change: a new exercise part, a new script, a new deliverable inside an existing unit | `1.4.2` → `1.5.0` |
-| 3rd (PATCH) | minor change: a fix, a typo, a clarification | `1.4.2` → `1.4.3` |
+| Digit | When it changes | Command | Example |
+|---|---|---|---|
+| 1st | the work moves on to the **next unit** | `./scripts/release.sh next-unit "..."` | `1.4.1` → `2.0.0` |
+| 2nd | a change **inside the same unit** (new script, new deliverable, new part) | `./scripts/release.sh same-unit "..."` | `2.0.0` → `2.1.0` |
+| 3rd | a small fix (typo, wording, refreshed output) | `./scripts/release.sh fix "..."` | `2.1.0` → `2.1.1` |
 
-A higher digit resets the lower ones to 0. Each version is a Git tag (`v1.0.0`); a published tag is never moved.
-New version: `./scripts/release.sh major|minor|patch "what changed"`.
+A higher digit resets the lower ones to 0. Each version is a Git tag (`v2.0.0`); a published tag is never moved.
+`major`, `minor` and `patch` are accepted as synonyms of `next-unit`, `same-unit` and `fix`.
+Rule in force since 2026-11-16; the versions up to `v1.4.1` (units 01 to 03) were numbered before it.
+
+## v2.0.0 - 2026-11-16
+- Units 01 to 03 validated in Docker; versioning rule; start of Unit 04
 
 ## v1.4.1 - 2026-11-16
 - Unit 03: Docker instructions in the deliverable, refreshed test output

@@ -11,7 +11,7 @@ Le détail des corrections du 26/10 (P01 à P03) reste dans `PLAN.md`.
 | 01-B | Logs dans MongoDB (P01) | ✅ fait, testé 8/8 | Rien |
 | 01 | API Basics (HTTP, JSON, gRPC) | ✅ réponses dans le docx | Corriger une réponse (voir §3) |
 | 02 | Elasticsearch + Kibana (P02) | ✅ fait, dashboard à 4 panneaux capturé | Relancer `./test_p02.sh` pour mettre à jour sa sortie |
-| 03 | Configuration par environnement (P03) | ✅ fait, testé 8/8 | Rien (`config.yaml` est suivi par Git depuis le 15/11) |
+| 03 | Configuration par environnement (P03) | ✅ fait, testé 8/8 dans Docker le 16/11 | Rien |
 | 04b | Release management (P04) | ❌ pas fait | Tout le labo + le document de réponses |
 | 04c | GitKraken (optionnel) | ❌ pas fait | Capture du graphe, lien de branche, 2 phrases |
 | 05 | Rollbacks Git (P05) | 🟡 script + 7 réponses théoriques | Sortie du script enregistrée, réponses aux questions des parties (voir §3) |
@@ -197,15 +197,15 @@ git push origin v1.0.0 && echo ok
 
 ### Versions
 
-Trois chiffres, `1.0.0`, écrits dans `VERSION`, détaillés dans `CHANGELOG.md`, et posés comme tag Git (`v1.0.0`) :
+Trois chiffres, écrits dans `VERSION`, détaillés dans `CHANGELOG.md`, et posés comme tag Git (`v2.0.0`) :
 
 | Chiffre | Change quand | Commande |
 |---|---|---|
-| 1er | gros changement (nouvelle unité rendue, structure modifiée) | `./scripts/release.sh major "…"` |
-| 2e | changement moyen (nouvelle partie, nouveau script, nouveau livrable) | `./scripts/release.sh minor "…"` |
-| 3e | petit changement (correction, faute, précision) | `./scripts/release.sh patch "…"` |
+| 1er | on passe à l'**unité suivante** | `./scripts/release.sh next-unit "…"` |
+| 2e | un changement **dans la même unité** | `./scripts/release.sh same-unit "…"` |
+| 3e | une petite correction | `./scripts/release.sh fix "…"` |
 
-Le script met à jour `VERSION` et `CHANGELOG.md`, committe, crée le tag et pousse.
+Le script met à jour `VERSION` et `CHANGELOG.md`, committe, crée le tag et pousse. Les versions jusqu'à `v1.4.1` ont été numérotées avant cette règle.
 
 ### À savoir
 
