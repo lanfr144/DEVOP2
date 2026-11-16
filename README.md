@@ -13,6 +13,7 @@ Le détail des corrections du 26/10 (P01 à P03) reste dans `PLAN.md`.
 | 02 | Elasticsearch + Kibana (P02) | ✅ fait, dashboard à 4 panneaux capturé | Relancer `./test_p02.sh` pour mettre à jour sa sortie |
 | 03 | Configuration par environnement (P03) | ✅ fait, testé 8/8 dans Docker le 16/11 | Rien |
 | 04b | Release management (P04) | ❌ pas fait | Tout le labo + le document de réponses |
+| 04 | Labo API Gateway (NGINX devant Book&Ride, extraction du service rentals) | ❌ pas commencé ; le projet `bookandride` de départ n'est pas dans ce dossier | Retrouver le monolithe Book&Ride, faire les 4 checkpoints, README, ADR-001, ADR-002, 5 réponses |
 | 04c | GitKraken (optionnel) | ❌ pas fait | Capture du graphe, lien de branche, 2 phrases |
 | 05 | Rollbacks Git (P05) | 🟡 script + 7 réponses théoriques | Sortie du script enregistrée, réponses aux questions des parties (voir §3) |
 | 06 | Évaluation 1 (logs, config, release, rollback) | – | Dépend de P02 à P05 |
@@ -158,7 +159,7 @@ Grille trouvée dans `Planning_Promo2_DevOp2.xlsx` (feuille `assessment1`) : QCM
 - **Dans le dossier** : `ci-cd-demo/` et `kubernetes-setup-scripts/ci-cd-demo/` sont deux clones identiques du dépôt d'une autre personne (un seul `Jenkinsfile`). Ce n'est pas ton travail : ne pas le rendre.
 
 ### Hors périmètre
-`COURS/Unit04/Unit 04 - API Gateway` porte l'en-tête DATOP2 (autre cours) et `COURS/Unit11/Arbeitsblatt…` sont des fiches d'un autre module. Je ne les ai pas comptés.
+`COURS/Unit11/Arbeitsblatt…` sont des fiches d'un autre module, non comptées. Le labo « Unit 04 - API Gateway » porte l'en-tête DATOP2 par erreur : il fait partie de DEVOP2 (précision du 16/11) et il est compté dans l'unité 04.
 
 ## 4. Ce qu'il faut rendre
 

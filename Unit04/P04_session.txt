@@ -1,0 +1,615 @@
+Script started on 2026-11-16 19:07:12+01:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="188" LINES="51"]
+]0;lanfr144@PCLanFr144: /mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISESlanfr144@PCLanFr144:/mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES$ cd Unit04cd Unit04
+]0;lanfr144@PCLanFr144: /mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04lanfr144@PCLanFr144:/mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04$ ./start.sh./start.sh
+--- Git identity and GitHub token (taken from this machine)
+KEEP  GIT_USER_NAME (already set in .env)
+KEEP  GIT_USER_EMAIL (already set in .env)
+KEEP  GH_TOKEN (already set in .env)
+--- checking host ports
+check_ports: no host port defined in .env
+--- starting (waits for every healthcheck)
+
+[+] Building 0.0s (0/1)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+[+] Building 0.2s (1/1)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+[+] Building 0.3s (1/1)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+[+] Building 0.5s (1/1)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+[+] Building 0.5s (1/2)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+[+] Building 0.6s (2/3)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.2s
+[+] Building 0.8s (2/3)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.3s
+[+] Building 0.9s (2/3)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.5s
+[+] Building 1.1s (2/3)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.6s
+[+] Building 1.2s (2/3)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+[+] Building 1.3s (3/3)                                                                                                                                                                     
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+[+] Building 1.4s (6/11)                                                                                                                                                                    
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => => resolve docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => [internal] load build context                                                                                                                                                      0.0s
+ => => transferring context: 35B                                                                                                                                                       0.0s
+[+] Building 1.5s (11/12)                                                                                                                                                                   
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => => resolve docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => [internal] load build context                                                                                                                                                      0.0s
+ => => transferring context: 35B                                                                                                                                                       0.0s
+ => CACHED [2/6] RUN apt-get update  && apt-get install -y --no-install-recommends       bash ca-certificates curl git gh jq less nano  && rm -rf /var/lib/apt/lists/*                 0.0s
+ => CACHED [3/6] RUN pip install --no-cache-dir --root-user-action=ignore       pyyaml python-dotenv pymongo requests pytest                                                           0.0s
+ => CACHED [4/6] COPY entrypoint.sh /usr/local/bin/devop2-entrypoint                                                                                                                   0.0s
+ => CACHED [5/6] RUN sed -i 's/\r$//' /usr/local/bin/devop2-entrypoint  && chmod +x /usr/local/bin/devop2-entrypoint                                                                   0.0s
+ => CACHED [6/6] WORKDIR /work                                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                 0.1s
+ => => exporting layers                                                                                                                                                                0.0s
+ => => exporting manifest sha256:924d6350683774dbe686cb3e1920898ffc47fd0f47d31842214e60655babcc46                                                                                      0.0s
+ => => exporting config sha256:a900e4a56fb24055c035033a39d8d939f8bae6bf94652cce0c4cba225df5ac3c                                                                                        0.0s
+ => => exporting attestation manifest sha256:3e55c86ed4a647dc27ec9ed1b6ed64a2347179b1252a20b79e73d05524d6055b                                                                          0.0s
+ => => exporting manifest list sha256:c4f33779c7fe7b40df8f4acd033908500df11b96c9d36ad99710cddd919afbbf                                                                                 0.0s
+ => => naming to docker.io/library/devop2-tools:1.0                                                                                                                                    0.0s
+[+] Building -0.8s (12/12)                                                                                                                                                                  
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => => resolve docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => [internal] load build context                                                                                                                                                      0.0s
+ => => transferring context: 35B                                                                                                                                                       0.0s
+ => CACHED [2/6] RUN apt-get update  && apt-get install -y --no-install-recommends       bash ca-certificates curl git gh jq less nano  && rm -rf /var/lib/apt/lists/*                 0.0s
+ => CACHED [3/6] RUN pip install --no-cache-dir --root-user-action=ignore       pyyaml python-dotenv pymongo requests pytest                                                           0.0s
+ => CACHED [4/6] COPY entrypoint.sh /usr/local/bin/devop2-entrypoint                                                                                                                   0.0s
+ => CACHED [5/6] RUN sed -i 's/\r$//' /usr/local/bin/devop2-entrypoint  && chmod +x /usr/local/bin/devop2-entrypoint                                                                   0.0s
+ => CACHED [6/6] WORKDIR /work                                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                 0.2s
+ => => exporting layers                                                                                                                                                                0.0s
+ => => exporting manifest sha256:924d6350683774dbe686cb3e1920898ffc47fd0f47d31842214e60655babcc46                                                                                      0.0s
+ => => exporting config sha256:a900e4a56fb24055c035033a39d8d939f8bae6bf94652cce0c4cba225df5ac3c                                                                                        0.0s
+ => => exporting attestation manifest sha256:3e55c86ed4a647dc27ec9ed1b6ed64a2347179b1252a20b79e73d05524d6055b                                                                          0.0s
+ => => exporting manifest list sha256:c4f33779c7fe7b40df8f4acd033908500df11b96c9d36ad99710cddd919afbbf                                                                                 0.0s
+ => => naming to docker.io/library/devop2-tools:1.0                                                                                                                                    0.0s
+ => => unpacking to docker.io/library/devop2-tools:1.0                                                                                                                                 0.0s
+[+] Building -0.7s (12/13)                                                                                                                                                                  
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => => resolve docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => [internal] load build context                                                                                                                                                      0.0s
+ => => transferring context: 35B                                                                                                                                                       0.0s
+ => CACHED [2/6] RUN apt-get update  && apt-get install -y --no-install-recommends       bash ca-certificates curl git gh jq less nano  && rm -rf /var/lib/apt/lists/*                 0.0s
+ => CACHED [3/6] RUN pip install --no-cache-dir --root-user-action=ignore       pyyaml python-dotenv pymongo requests pytest                                                           0.0s
+ => CACHED [4/6] COPY entrypoint.sh /usr/local/bin/devop2-entrypoint                                                                                                                   0.0s
+ => CACHED [5/6] RUN sed -i 's/\r$//' /usr/local/bin/devop2-entrypoint  && chmod +x /usr/local/bin/devop2-entrypoint                                                                   0.0s
+ => CACHED [6/6] WORKDIR /work                                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                 0.2s
+ => => exporting layers                                                                                                                                                                0.0s
+ => => exporting manifest sha256:924d6350683774dbe686cb3e1920898ffc47fd0f47d31842214e60655babcc46                                                                                      0.0s
+ => => exporting config sha256:a900e4a56fb24055c035033a39d8d939f8bae6bf94652cce0c4cba225df5ac3c                                                                                        0.0s
+ => => exporting attestation manifest sha256:3e55c86ed4a647dc27ec9ed1b6ed64a2347179b1252a20b79e73d05524d6055b                                                                          0.0s
+ => => exporting manifest list sha256:c4f33779c7fe7b40df8f4acd033908500df11b96c9d36ad99710cddd919afbbf                                                                                 0.0s
+ => => naming to docker.io/library/devop2-tools:1.0                                                                                                                                    0.0s
+ => => unpacking to docker.io/library/devop2-tools:1.0                                                                                                                                 0.0s
+ => resolving provenance for metadata file                                                                                                                                             0.0s
+[+] Building -0.7s (13/13) FINISHED                                                                                                                                                         
+ => [internal] load local bake definitions                                                                                                                                             0.0s
+ => => reading from stdin 630B                                                                                                                                                         0.0s
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 1.86kB                                                                                                                                                 0.0s
+ => [internal] load metadata for docker.io/library/python:3.12-slim-bookworm                                                                                                           0.8s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => => resolve docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df                                                     0.0s
+ => [internal] load build context                                                                                                                                                      0.0s
+ => => transferring context: 35B                                                                                                                                                       0.0s
+ => CACHED [2/6] RUN apt-get update  && apt-get install -y --no-install-recommends       bash ca-certificates curl git gh jq less nano  && rm -rf /var/lib/apt/lists/*                 0.0s
+ => CACHED [3/6] RUN pip install --no-cache-dir --root-user-action=ignore       pyyaml python-dotenv pymongo requests pytest                                                           0.0s
+ => CACHED [4/6] COPY entrypoint.sh /usr/local/bin/devop2-entrypoint                                                                                                                   0.0s
+ => CACHED [5/6] RUN sed -i 's/\r$//' /usr/local/bin/devop2-entrypoint  && chmod +x /usr/local/bin/devop2-entrypoint                                                                   0.0s
+ => CACHED [6/6] WORKDIR /work                                                                                                                                                         0.0s
+ => exporting to image                                                                                                                                                                 0.2s
+ => => exporting layers                                                                                                                                                                0.0s
+ => => exporting manifest sha256:924d6350683774dbe686cb3e1920898ffc47fd0f47d31842214e60655babcc46                                                                                      0.0s
+ => => exporting config sha256:a900e4a56fb24055c035033a39d8d939f8bae6bf94652cce0c4cba225df5ac3c                                                                                        0.0s
+ => => exporting attestation manifest sha256:3e55c86ed4a647dc27ec9ed1b6ed64a2347179b1252a20b79e73d05524d6055b                                                                          0.0s
+ => => exporting manifest list sha256:c4f33779c7fe7b40df8f4acd033908500df11b96c9d36ad99710cddd919afbbf                                                                                 0.0s
+ => => naming to docker.io/library/devop2-tools:1.0                                                                                                                                    0.0s
+ => => unpacking to docker.io/library/devop2-tools:1.0                                                                                                                                 0.0s
+ => resolving provenance for metadata file                                                                                                                                             0.0s
+[+] up 1/2
+ ✔ Image devop2-tools:1.0 Built                                                                                                                                                         2.0s
+ ⠋ Network unit04_default Creating                                                                                                                                                      0.0s
+[+] up 2/3
+ ✔ Image devop2-tools:1.0   Built                                                                                                                                                       2.0s
+ ✔ Network unit04_default   Created                                                                                                                                                     0.0s
+ ⠋ Container unit04-tools-1 Creating                                                                                                                                                    0.1s
+
+
+
+ ⠙ Container unit04-tools-1 Starting                                                                                                                                                    0.2s
+
+
+
+ ⠹ Container unit04-tools-1 Waiting                                                                                                                                                     0.3s
+
+
+
+ ⠸ Container unit04-tools-1 Waiting                                                                                                                                                     0.4s
+
+
+
+ ⠼ Container unit04-tools-1 Waiting                                                                                                                                                     0.5s
+
+
+
+ ⠴ Container unit04-tools-1 Waiting                                                                                                                                                     0.6s
+
+
+
+ ⠦ Container unit04-tools-1 Waiting                                                                                                                                                     0.7s
+
+
+
+ ⠧ Container unit04-tools-1 Waiting                                                                                                                                                     0.8s
+
+
+
+ ⠇ Container unit04-tools-1 Waiting                                                                                                                                                     0.9s
+
+
+
+ ⠏ Container unit04-tools-1 Waiting                                                                                                                                                     1.0s
+
+
+
+ ⠋ Container unit04-tools-1 Waiting                                                                                                                                                     1.1s
+
+
+
+ ⠙ Container unit04-tools-1 Waiting                                                                                                                                                     1.2s
+
+
+
+ ⠹ Container unit04-tools-1 Waiting                                                                                                                                                     1.3s
+
+
+
+ ⠸ Container unit04-tools-1 Waiting                                                                                                                                                     1.4s
+
+
+
+ ⠼ Container unit04-tools-1 Waiting                                                                                                                                                     1.5s
+
+
+
+ ⠴ Container unit04-tools-1 Waiting                                                                                                                                                     1.6s
+
+
+
+ ⠦ Container unit04-tools-1 Waiting                                                                                                                                                     1.7s
+
+
+
+ ⠧ Container unit04-tools-1 Waiting                                                                                                                                                     1.8s
+
+
+
+ ⠇ Container unit04-tools-1 Waiting                                                                                                                                                     1.9s
+
+
+
+ ⠏ Container unit04-tools-1 Waiting                                                                                                                                                     2.0s
+
+
+
+ ⠋ Container unit04-tools-1 Waiting                                                                                                                                                     2.1s
+
+
+
+ ⠙ Container unit04-tools-1 Waiting                                                                                                                                                     2.2s
+
+
+
+ ⠹ Container unit04-tools-1 Waiting                                                                                                                                                     2.3s
+
+
+
+ ⠸ Container unit04-tools-1 Waiting                                                                                                                                                     2.4s
+
+
+
+ ⠼ Container unit04-tools-1 Waiting                                                                                                                                                     2.5s
+
+
+
+ ⠴ Container unit04-tools-1 Waiting                                                                                                                                                     2.6s
+
+
+
+ ⠦ Container unit04-tools-1 Waiting                                                                                                                                                     2.7s
+
+
+
+ ⠧ Container unit04-tools-1 Waiting                                                                                                                                                     2.8s
+
+
+
+ ⠇ Container unit04-tools-1 Waiting                                                                                                                                                     2.9s
+
+
+
+ ⠏ Container unit04-tools-1 Waiting                                                                                                                                                     3.0s
+
+
+
+ ⠋ Container unit04-tools-1 Waiting                                                                                                                                                     3.1s
+
+
+
+ ⠙ Container unit04-tools-1 Waiting                                                                                                                                                     3.2s
+
+
+
+ ⠹ Container unit04-tools-1 Waiting                                                                                                                                                     3.3s
+
+
+
+ ⠸ Container unit04-tools-1 Waiting                                                                                                                                                     3.4s
+
+
+
+ ⠼ Container unit04-tools-1 Waiting                                                                                                                                                     3.5s
+
+
+
+ ⠴ Container unit04-tools-1 Waiting                                                                                                                                                     3.6s
+
+
+
+ ⠦ Container unit04-tools-1 Waiting                                                                                                                                                     3.7s
+
+
+
+ ⠧ Container unit04-tools-1 Waiting                                                                                                                                                     3.8s
+
+
+
+ ⠇ Container unit04-tools-1 Waiting                                                                                                                                                     3.9s
+
+
+
+ ⠏ Container unit04-tools-1 Waiting                                                                                                                                                     4.0s
+
+
+
+ ⠋ Container unit04-tools-1 Waiting                                                                                                                                                     4.1s
+
+
+
+ ⠙ Container unit04-tools-1 Waiting                                                                                                                                                     4.2s
+
+
+
+ ⠹ Container unit04-tools-1 Waiting                                                                                                                                                     4.3s
+
+
+
+ ⠸ Container unit04-tools-1 Waiting                                                                                                                                                     4.4s
+
+
+
+ ⠼ Container unit04-tools-1 Waiting                                                                                                                                                     4.5s
+
+
+
+ ⠴ Container unit04-tools-1 Waiting                                                                                                                                                     4.6s
+
+
+
+ ⠦ Container unit04-tools-1 Waiting                                                                                                                                                     4.7s
+
+
+
+ ⠧ Container unit04-tools-1 Waiting                                                                                                                                                     4.8s
+
+
+
+ ⠇ Container unit04-tools-1 Waiting                                                                                                                                                     4.9s
+
+
+
+ ⠏ Container unit04-tools-1 Waiting                                                                                                                                                     5.0s
+
+
+
+ ⠋ Container unit04-tools-1 Waiting                                                                                                                                                     5.1s
+
+
+
+ ⠙ Container unit04-tools-1 Waiting                                                                                                                                                     5.2s
+
+
+
+ ⠹ Container unit04-tools-1 Waiting                                                                                                                                                     5.3s
+
+
+
+ ⠸ Container unit04-tools-1 Waiting                                                                                                                                                     5.4s
+
+
+
+ ⠼ Container unit04-tools-1 Waiting                                                                                                                                                     5.5s
+
+
+
+ ⠴ Container unit04-tools-1 Waiting                                                                                                                                                     5.6s
+
+
+
+ ⠦ Container unit04-tools-1 Waiting                                                                                                                                                     5.7s
+[+] up 3/3
+
+
+ ✔ Container unit04-tools-1 Healthy                                                                                                                                                     5.8s
+SERVICE   STATUS                   PORTS
+tools     Up 6 seconds (healthy)   
+
+Next commands:
+  docker exec -it unit04-tools-1 bash
+  # then, inside the container:
+  git init release-strategies-lab    # then the lab, parts 1 to 4 (Unit04/VERIFICATION.md)
+  ./record_history.sh                # at the end: writes P04_git_history.txt
+]0;lanfr144@PCLanFr144: /mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04lanfr144@PCLanFr144:/mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04$ docker exec -it unit04-tools-1 bashdocker exec -it unit04-tools-1 bash
+root@c219e1bc4d7b:/work/Unit04# vi tall.sh
+bash: vi: command not found
+root@c219e1bc4d7b:/work/Unit04# ls
+ GitKarken.txt					 'Unit 04a - Release Management Theory.pdf'  'Unit 04c - GitKraken (optional).pdf'	     docker-compose.yml
+ P04_git_history.txt				 'Unit 04b - Release Management Lab.docx'     Unit04_Release_Management_Strategies_v2.pptx   record_history.sh
+ RELEASE_NOTES.md				 'Unit 04b- GitKraken.docx'		      VERIFICATION.md				     release-strategies-lab
+'Unit 04 - Release Management Strategies-1.pdf'  'Unit 04c - GitKraken (optional).docx'       app.py					     start.sh
+root@c219e1bc4d7b:/work/Unit04# ./todo.sh
+bash: ./todo.sh: cannot execute: required file not found
+root@c219e1bc4d7b:/work/Unit04# chmod +od +x ./todo.sh
+root@c219e1bc4d7b:/work/Unit04# chmod +x ./todo.sh./todo.sh
+bash: ./todo.sh: cannot execute: required file not found
+root@c219e1bc4d7b:/work/Unit04# ls
+'Unit 04 - Release Management Strategies-1.pdf'  'Unit 04b- GitKraken.docx'		  Unit04_Release_Management_Strategies_v2.pptx	 record_history.sh
+'Unit 04a - Release Management Theory.pdf'	 'Unit 04c - GitKraken (optional).docx'   VERIFICATION.md				 start.sh
+'Unit 04b - Release Management Lab.docx'	 'Unit 04c - GitKraken (optional).pdf'	  docker-compose.yml				 todo.sh
+root@c219e1bc4d7b:/work/Unit04# ls./todo.sh
+++ dirname ./todo.sh
++ cd .
++ '[' '!' -e release-strategies-lab ']'
++ echo 'Partie 1 : trois versions'
+Partie 1 : trois versions
++ git init release-strategies-lab
+Initialized empty Git repository in /work/Unit04/release-strategies-lab/.git/
++ cd release-strategies-lab
++ git branch -m main
++ echo '# Release Management Lab'
++ git add README.md
++ git commit -m 'Initial commit'
+[main (root-commit) e7d1872] Initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
++ echo 'print('\''Hello, version 1.0.0'\'')'
++ git add app.py
++ git commit -m 'Add initial version of app'
+[main ac68225] Add initial version of app
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.py
++ git tag v1.0.0
++ echo 'print('\''New feature: logging enabled'\'')'
++ git add app.py
++ git commit -m 'Add logging feature'
+[main 9e64432] Add logging feature
+ 1 file changed, 1 insertion(+)
++ git tag v1.1.0
++ printf 'def start_app():\n    print('\''App starting with new API'\'')\n'
++ git add app.py
++ git commit -m 'Refactor: breaking API change'
+[main 24cccd6] Refactor: breaking API change
+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ git tag v2.0.0
++ echo 'Partie 2 : notes de version (écrire RELEASE_NOTES.md, puis)'
+Partie 2 : notes de version (écrire RELEASE_NOTES.md, puis)
++ cat
++ git add RELEASE_NOTES.md
++ git commit -m 'Add release notes for v1.0.0 to v2.0.0'
+[main 54d81fd] Add release notes for v1.0.0 to v2.0.0
+ 1 file changed, 11 insertions(+)
+ create mode 100644 RELEASE_NOTES.md
++ gh repo create lanfr144/release-strategies-lab --public --source=. --remote=origin --push
+✓ Created repository lanfr144/release-strategies-lab on GitHub
+✓ Added remote https://github.com/lanfr144/release-strategies-lab.git
+Enumerating objects: 15, done.
+Counting objects:   6% (1/15)Counting objects:  13% (2/15)Counting objects:  20% (3/15)Counting objects:  26% (4/15)Counting objects:  33% (5/15)Counting objects:  40% (6/15)Counting objects:  46% (7/15)Counting objects:  53% (8/15)Counting objects:  60% (9/15)Counting objects:  66% (10/15)Counting objects:  73% (11/15)Counting objects:  80% (12/15)Counting objects:  86% (13/15)Counting objects:  93% (14/15)Counting objects: 100% (15/15)Counting objects: 100% (15/15), done.
+Delta compression using up to 20 threads
+Compressing objects:   8% (1/12)Compressing objects:  16% (2/12)Compressing objects:  25% (3/12)Compressing objects:  33% (4/12)Compressing objects:  41% (5/12)Compressing objects:  50% (6/12)Compressing objects:  58% (7/12)Compressing objects:  66% (8/12)Compressing objects:  75% (9/12)Compressing objects:  83% (10/12)Compressing objects:  91% (11/12)Compressing objects: 100% (12/12)Compressing objects: 100% (12/12), done.
+Writing objects:   6% (1/15)Writing objects:  13% (2/15)Writing objects:  20% (3/15)Writing objects:  26% (4/15)Writing objects:  33% (5/15)Writing objects:  40% (6/15)Writing objects:  46% (7/15)Writing objects:  53% (8/15)Writing objects:  60% (9/15)Writing objects:  66% (10/15)Writing objects:  73% (11/15)Writing objects:  80% (12/15)Writing objects:  86% (13/15)Writing objects:  93% (14/15)Writing objects: 100% (15/15)Writing objects: 100% (15/15), 1.53 KiB | 5.00 KiB/s, done.
+Total 15 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas:   0% (0/1)remote: Resolving deltas: 100% (1/1)remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/lanfr144/release-strategies-lab.git
+ * [new branch]      HEAD -> main
+branch 'main' set up to track 'origin/main'.
+✓ Pushed commits to https://github.com/lanfr144/release-strategies-lab.git
++ git push origin --tags
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/lanfr144/release-strategies-lab.git
+ * [new tag]         v1.0.0 -> v1.0.0
+ * [new tag]         v1.1.0 -> v1.1.0
+ * [new tag]         v2.0.0 -> v2.0.0
++ echo 'Partie 3.1 : blue/green'
+Partie 3.1 : blue/green
++ git checkout -b blue
+Switched to a new branch 'blue'
++ echo 'Blue version running'
++ git add deployment.txt
++ git commit -m 'Blue: current production version'
+[blue 77dff8d] Blue: current production version
+ 1 file changed, 1 insertion(+)
+ create mode 100644 deployment.txt
++ git checkout -b green
+Switched to a new branch 'green'
++ echo 'Green version running'
++ git add deployment.txt
++ git commit -m 'Green: new version deployed and validated'
+[green 1f7a906] Green: new version deployed and validated
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
++ git merge green
+Updating 54d81fd..1f7a906
+Fast-forward
+ deployment.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 deployment.txt
++ echo 'Partie 3.2 : rolling'
+Partie 3.2 : rolling
++ mkdir server1 server2 server3
++ for s in 1 2 3
++ echo v1.0.0
++ for s in 1 2 3
++ echo v1.0.0
++ for s in 1 2 3
++ echo v1.0.0
++ git add .
++ git commit -m 'Initial state: 3 servers on v1.0.0'
+[main 6b28c2b] Initial state: 3 servers on v1.0.0
+ 3 files changed, 3 insertions(+)
+ create mode 100644 server1/version.txt
+ create mode 100644 server2/version.txt
+ create mode 100644 server3/version.txt
++ for s in 1 2 3
++ echo v1.1.0
++ git add .
++ git commit -m 'Rolling update: server1 to v1.1.0'
+[main 25863a3] Rolling update: server1 to v1.1.0
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ for s in 1 2 3
++ echo v1.1.0
++ git add .
++ git commit -m 'Rolling update: server2 to v1.1.0'
+[main 5e3d3c2] Rolling update: server2 to v1.1.0
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ for s in 1 2 3
++ echo v1.1.0
++ git add .
++ git commit -m 'Rolling update: server3 to v1.1.0'
+[main 23ec8b1] Rolling update: server3 to v1.1.0
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ echo 'v2.0.0 (canary)'
++ git add .
++ git commit -m 'Canary: server1 runs v2.0.0 for 10% of traffic'
+[main cd5d990] Canary: server1 runs v2.0.0 for 10% of traffic
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ git revert --no-edit HEAD
+[main 10e6cee] Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+ Date: Mon Nov 16 18:49:08 2026 +0000
+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ cat server1/version.txt
+v1.1.0
++ echo 'Pousser et enregistrer la trace'
+Pousser et enregistrer la trace
++ git push origin main --tags
+Enumerating objects: 24, done.
+Counting objects:   4% (1/24)Counting objects:   8% (2/24)Counting objects:  12% (3/24)Counting objects:  16% (4/24)Counting objects:  20% (5/24)Counting objects:  25% (6/24)Counting objects:  29% (7/24)Counting objects:  33% (8/24)Counting objects:  37% (9/24)Counting objects:  41% (10/24)Counting objects:  45% (11/24)Counting objects:  50% (12/24)Counting objects:  54% (13/24)Counting objects:  58% (14/24)Counting objects:  62% (15/24)Counting objects:  66% (16/24)Counting objects:  70% (17/24)Counting objects:  75% (18/24)Counting objects:  79% (19/24)Counting objects:  83% (20/24)Counting objects:  87% (21/24)Counting objects:  91% (22/24)Counting objects:  95% (23/24)Counting objects: 100% (24/24)Counting objects: 100% (24/24), done.
+Delta compression using up to 20 threads
+Compressing objects:   6% (1/15)Compressing objects:  13% (2/15)Compressing objects:  20% (3/15)Compressing objects:  26% (4/15)Compressing objects:  33% (5/15)Compressing objects:  40% (6/15)Compressing objects:  46% (7/15)Compressing objects:  53% (8/15)Compressing objects:  60% (9/15)Compressing objects:  66% (10/15)Compressing objects:  73% (11/15)Compressing objects:  80% (12/15)Compressing objects:  86% (13/15)Compressing objects:  93% (14/15)Compressing objects: 100% (15/15)Compressing objects: 100% (15/15), done.
+Writing objects:   4% (1/23)Writing objects:   8% (2/23)Writing objects:  13% (3/23)Writing objects:  17% (4/23)Writing objects:  21% (5/23)Writing objects:  26% (6/23)Writing objects:  30% (7/23)Writing objects:  34% (8/23)Writing objects:  39% (9/23)Writing objects:  43% (10/23)Writing objects:  47% (11/23)Writing objects:  52% (12/23)Writing objects:  56% (13/23)Writing objects:  60% (14/23)Writing objects:  65% (15/23)Writing objects:  69% (16/23)Writing objects:  73% (17/23)Writing objects:  78% (18/23)Writing objects:  82% (19/23)Writing objects:  86% (20/23)Writing objects:  91% (21/23)Writing objects:  95% (22/23)Writing objects: 100% (23/23)Writing objects: 100% (23/23), 1.96 KiB | 9.00 KiB/s, done.
+Total 23 (delta 7), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas:   0% (0/7)remote: Resolving deltas:  14% (1/7)remote: Resolving deltas:  28% (2/7)remote: Resolving deltas:  42% (3/7)remote: Resolving deltas:  57% (4/7)remote: Resolving deltas:  71% (5/7)remote: Resolving deltas:  85% (6/7)remote: Resolving deltas: 100% (7/7)remote: Resolving deltas: 100% (7/7), done.
+To https://github.com/lanfr144/release-strategies-lab.git
+   54d81fd..10e6cee  main -> main
++ git push origin blue green
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/lanfr144/release-strategies-lab.git
+ * [new branch]      blue -> blue
+ * [new branch]      green -> green
++ cd ..
++ ./record_history.sh
+Written: /work/Unit04/P04_git_history.txt (88 lines)
++ echo Contrôler
+Contrôler
++ cd release-strategies-lab
++ git log --oneline --graph --all --decorate
+=* 10e6cee (HEAD -> main, origin/main) Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+* cd5d990 Canary: server1 runs v2.0.0 for 10% of traffic
+* 23ec8b1 Rolling update: server3 to v1.1.0
+* 5e3d3c2 Rolling update: server2 to v1.1.0
+* 25863a3 Rolling update: server1 to v1.1.0
+* 6b28c2b Initial state: 3 servers on v1.0.0
+* 1f7a906 (origin/green, green) Green: new version deployed and validated
+* 77dff8d (origin/blue, blue) Blue: current production version
+* 54d81fd Add release notes for v1.0.0 to v2.0.0
+* 24cccd6 (tag: v2.0.0) Refactor: breaking API change
+* 9e64432 (tag: v1.1.0) Add logging feature
+* ac68225 (tag: v1.0.0) Add initial version of app
+* e7d1872 Initial commit
+>+ git ls-remote --tags origin
+ac68225a80a3b06f2c7425c9d1ebb388e50cb73e	refs/tags/v1.0.0
+9e64432ecd2225051ac8ff44f7bfef26fcf8fd95	refs/tags/v1.1.0
+24cccd6d15f394f8b183d8469150d809053a4f11	refs/tags/v2.0.0
+root@c219e1bc4d7b:/work/Unit04# exit
+exit
+]0;lanfr144@PCLanFr144: /mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04lanfr144@PCLanFr144:/mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04$ exit
+exit
+
+Script done on 2026-11-16 19:50:56+01:00 [COMMAND_EXIT_CODE="0"]

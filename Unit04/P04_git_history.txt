@@ -1,0 +1,88 @@
+DEVOP2 - Unit 04b - Release Management Lab - record of the work
+Repository: https://github.com/lanfr144/release-strategies-lab.git
+Generated on 2026-11-16 with record_history.sh (read-only git commands)
+
+== git log --oneline --graph --all --decorate
+* 10e6cee (HEAD -> main, origin/main) Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+* cd5d990 Canary: server1 runs v2.0.0 for 10% of traffic
+* 23ec8b1 Rolling update: server3 to v1.1.0
+* 5e3d3c2 Rolling update: server2 to v1.1.0
+* 25863a3 Rolling update: server1 to v1.1.0
+* 6b28c2b Initial state: 3 servers on v1.0.0
+* 1f7a906 (origin/green, green) Green: new version deployed and validated
+* 77dff8d (origin/blue, blue) Blue: current production version
+* 54d81fd Add release notes for v1.0.0 to v2.0.0
+* 24cccd6 (tag: v2.0.0) Refactor: breaking API change
+* 9e64432 (tag: v1.1.0) Add logging feature
+* ac68225 (tag: v1.0.0) Add initial version of app
+* e7d1872 Initial commit
+
+== git tag
+v1.0.0
+v1.1.0
+v2.0.0
+
+== git branch -a
+  blue
+  green
+* main
+  remotes/origin/blue
+  remotes/origin/green
+  remotes/origin/main
+
+== what each commit changed (oldest first)
+e7d1872  2026-11-16 18:48  Initial commit
+A	README.md
+ac68225  2026-11-16 18:48  Add initial version of app
+A	app.py
+9e64432  2026-11-16 18:48  Add logging feature
+M	app.py
+24cccd6  2026-11-16 18:48  Refactor: breaking API change
+M	app.py
+54d81fd  2026-11-16 18:48  Add release notes for v1.0.0 to v2.0.0
+A	RELEASE_NOTES.md
+77dff8d  2026-11-16 18:49  Blue: current production version
+A	deployment.txt
+1f7a906  2026-11-16 18:49  Green: new version deployed and validated
+M	deployment.txt
+6b28c2b  2026-11-16 18:49  Initial state: 3 servers on v1.0.0
+A	server1/version.txt
+A	server2/version.txt
+A	server3/version.txt
+25863a3  2026-11-16 18:49  Rolling update: server1 to v1.1.0
+M	server1/version.txt
+5e3d3c2  2026-11-16 18:49  Rolling update: server2 to v1.1.0
+M	server2/version.txt
+23ec8b1  2026-11-16 18:49  Rolling update: server3 to v1.1.0
+M	server3/version.txt
+cd5d990  2026-11-16 18:49  Canary: server1 runs v2.0.0 for 10% of traffic
+M	server1/version.txt
+10e6cee  2026-11-16 18:49  Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+M	server1/version.txt
+
+== the three servers after each commit that touched them
+6b28c2b  Initial state: 3 servers on v1.0.0                        server1=v1.0.0  server2=v1.0.0  server3=v1.0.0  
+25863a3  Rolling update: server1 to v1.1.0                         server1=v1.1.0  server2=v1.0.0  server3=v1.0.0  
+5e3d3c2  Rolling update: server2 to v1.1.0                         server1=v1.1.0  server2=v1.1.0  server3=v1.0.0  
+23ec8b1  Rolling update: server3 to v1.1.0                         server1=v1.1.0  server2=v1.1.0  server3=v1.1.0  
+cd5d990  Canary: server1 runs v2.0.0 for 10% of traffic            server1=v2.0.0 (canary)  server2=v1.1.0  server3=v1.1.0  
+10e6cee  Revert "Canary: server1 runs v2.0.0 for 10% of traffic"   server1=v1.1.0  server2=v1.1.0  server3=v1.1.0  
+
+== git reflog (every movement of HEAD)
+10e6cee HEAD@{0} revert: Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+cd5d990 HEAD@{1} commit: Canary: server1 runs v2.0.0 for 10% of traffic
+23ec8b1 HEAD@{2} commit: Rolling update: server3 to v1.1.0
+5e3d3c2 HEAD@{3} commit: Rolling update: server2 to v1.1.0
+25863a3 HEAD@{4} commit: Rolling update: server1 to v1.1.0
+6b28c2b HEAD@{5} commit: Initial state: 3 servers on v1.0.0
+1f7a906 HEAD@{6} merge green: Fast-forward
+54d81fd HEAD@{7} checkout: moving from green to main
+1f7a906 HEAD@{8} commit: Green: new version deployed and validated
+77dff8d HEAD@{9} checkout: moving from blue to green
+77dff8d HEAD@{10} commit: Blue: current production version
+54d81fd HEAD@{11} checkout: moving from main to blue
+54d81fd HEAD@{12} commit: Add release notes for v1.0.0 to v2.0.0
+24cccd6 HEAD@{13} commit: Refactor: breaking API change
+9e64432 HEAD@{14} commit: Add logging feature
+ac68225 HEAD@{15} commit: Add initial version of app
+e7d1872 HEAD@{16} commit (initial): Initial commit

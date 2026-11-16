@@ -39,3 +39,19 @@ Dans `release-strategies-lab/` :
 ## 4. Ce qui manque
 
 Tout le labo et le document de réponses. Optionnel (04c, GitKraken) : capture du graphe avec le commit et son revert, lien de la branche `release-<prénom>-1.2`, deux phrases.
+
+## 5. Labo « API Gateway » (aussi dans l'unité 04)
+
+Énoncé : `COURS/Unit04/Unit 04 - API Gateway.pdf` (l'en-tête dit DATOP2 par erreur). Labo d'équipe (2 à 3 étudiants), noté sur 20 avec le monolithe de la semaine précédente.
+
+**Point de départ obligatoire** : le projet `bookandride/` (API FastAPI + base, lancé par Docker Compose, `curl http://localhost:8080/health` répond `"status":"ok"`). Il n'est pas dans ce dossier ; sans lui, demander la version de référence au professeur.
+
+| Checkpoint | À faire | Contrôle |
+|---|---|---|
+| 1. Reverse proxy | `gateway/nginx.conf`, service `gateway` sur le port 8000, retirer les `ports` de l'API | `:8000/health` répond ; `:8080/health` échoue |
+| 2. Sécurité | clé d'API sur `/rentals`, limite de 10 requêtes par seconde | sans clé : 401 ; 40 requêtes d'affilée : environ 25 × 200 et 15 × 429 |
+| 3. Microservice | `rentals-service/` avec sa propre base, route `/rentals` vers lui | 5 conteneurs ; `docker compose exec rentals pytest -q` : 3 tests ; `rentals` arrêté → books 200, rentals 502 |
+| 4. Observabilité | `/metrics` au format Prometheus dans le service rentals | `rentals_started_total` et `http_requests_total` s'affichent |
+
+À rendre : le projet `bookandride/` en zip (sans `.env`), un `README.md` (démarrage en 5 étapes au plus, schéma d'architecture, 8 à 10 commandes `curl`), `docs/adr/ADR-001-architecture.md` et `ADR-002-api-gateway.md`, et les réponses aux 5 questions « Check your understanding ».
+
