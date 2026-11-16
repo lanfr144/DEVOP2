@@ -1,0 +1,39 @@
+git log --oneline
+163e210 (HEAD -> main) Revert "Rolling update: server1 to v1.1.0"
+987521b Revert "Rolling update: server2 to v1.1.0"
+7635e83 Revert "Rolling update: server3 to v1.1.0"
+c08e66a Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+dc59fd1 Reapply "Canary: server1 runs v2.0.0 for 10% of traffic"
+86aee69 Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+16ce8de Canary: server1 runs v2.0.0 for 10% of traffic
+0999f6f Rolling update: server3 to v1.1.0
+91799a8 Rolling update: server2 to v1.1.0
+d42b9e6 Rolling update: server1 to v1.1.0
+46df9cc Initial state: 3 servers on v1.0.0
+71da8c6 (green) Green: new version deployed and validated
+798c89b (blue) Blue: current production version
+2c6a844 (tag: v2.0.0, origin/main) Refactor: breaking API change
+4ff869d (tag: v1.1.0) Add logging feature
+d8ef0a9 (tag: v1.0.0) Add initial version of app
+30504b6 Initial commit
+
+git reset --hard 86aee69
+HEAD is now at 86aee69 Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+
+git log --oneline
+86aee69 (HEAD -> main) Revert "Canary: server1 runs v2.0.0 for 10% of traffic"
+16ce8de Canary: server1 runs v2.0.0 for 10% of traffic
+0999f6f Rolling update: server3 to v1.1.0
+91799a8 Rolling update: server2 to v1.1.0
+d42b9e6 Rolling update: server1 to v1.1.0
+46df9cc Initial state: 3 servers on v1.0.0
+71da8c6 (green) Green: new version deployed and validated
+798c89b (blue) Blue: current production version
+2c6a844 (tag: v2.0.0, origin/main) Refactor: breaking API change
+4ff869d (tag: v1.1.0) Add logging feature
+d8ef0a9 (tag: v1.0.0) Add initial version of app
+30504b6 Initial commit
+
+cat server1/version.txt
+v1.1.0
+lanfr144@PCLanFr144:/mnt/c/Users/lanfr144/OneDrive - 365education/Documents/semestre_3/DEVOP2/EXERCISES/Unit04/release-strategies-lab$ 
