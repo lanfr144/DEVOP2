@@ -12,6 +12,9 @@ A higher digit resets the lower ones to 0. Each version is a Git tag (`v2.0.0`);
 `major`, `minor` and `patch` are accepted as synonyms of `next-unit`, `same-unit` and `fix`.
 Rule in force since 2026-11-16; the versions up to `v1.4.1` (units 01 to 03) were numbered before it.
 
+## v2.3.0 - 2026-11-17
+- Unit 04b and 04c: answers and GitKraken exercise
+
 ## v2.2.0 - 2026-11-17
 - Unit 04b: answers document
 
