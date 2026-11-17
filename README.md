@@ -15,8 +15,8 @@ Ce dépôt contient les unités 01 à 04.
 | 02 | Elasticsearch + Kibana (P02) | ✅ testé 10/10 dans Docker le 15/11, dashboard à 4 panneaux capturé | Rien |
 | 03 | Configuration par environnement (P03) | ✅ testé 8/8 dans Docker le 16/11 | Rien |
 | 04b | Release management (P04), labo | ✅ fait dans Docker le 16/11, poussé sur `lanfr144/release-strategies-lab` | Rien |
-| 04b | Release management (P04), document de réponses | ❌ pas fait | PDF ou DOCX : lien du dépôt, graphe, réponses aux questions, debrief, paragraphe final |
-| 04c | GitKraken (optionnel) | non fait, laissé de côté | – |
+| 04b | Release management (P04), document de réponses | ✅ `Unit04/P04_DELIVERABLE.docx` (version 2.3.1) | Rien |
+| 04c | GitKraken (optionnel) | ✅ fait le 17/11 sur la branche `release-francois-2.1` de `release-strategies-lab` ; capture, lien et deux phrases dans `P04_DELIVERABLE.docx` | Rien |
 
 Hors de ce dépôt : l'unité 05 (rollbacks Git) en a été retirée le 16/11 ; ses fichiers restent sur le disque, dans `Unit05/`. Les unités 07 (packaging Python) et 08 (CI/CD) ne sont pas commencées.
 
@@ -103,7 +103,7 @@ docker compose down   # arrêter
   2. Écrire `RELEASE_NOTES.md` (la plus récente en haut, le changement cassant bien visible) et pousser avec `git push origin main --tags`.
   3. Simuler trois façons de déployer : blue/green (deux branches, on bascule par un merge), rolling (3 dossiers `server1..3`, un commit par serveur), canary (un seul serveur passe en v2.0.0).
   4. Annuler le canary avec `git revert --no-edit HEAD` (pas `reset` : on ne réécrit pas un historique partagé).
-- **État** : labo fait dans le conteneur le 16/11 avec `run_lab.sh` : 13 commits, tags `v1.0.0`, `v1.1.0`, `v2.0.0`, branches `main`, `blue`, `green`, un `Revert "Canary…"`, le tout poussé sur `github.com/lanfr144/release-strategies-lab`. Traces : `P04_git_history.txt` (recréé par `record_history.sh`), `P04_session.txt` (journal du terminal), `Monkeying.txt` (premier essai, avec des reverts en trop retirés par un `reset`). **Le document de réponses n'est pas fait.**
+- **État** : labo fait dans le conteneur le 16/11 avec `run_lab.sh` : 13 commits, tags `v1.0.0`, `v1.1.0`, `v2.0.0`, branches `main`, `blue`, `green`, un `Revert "Canary…"`, le tout poussé sur `github.com/lanfr144/release-strategies-lab`. Traces : `P04_git_history.txt` (recréé par `record_history.sh`), `P04_session.txt` (journal du terminal), `Monkeying.txt` (premier essai, avec des reverts en trop retirés par un `reset`). Le document de réponses est `P04_DELIVERABLE.docx`.
 - **À rendre** : **un seul PDF ou DOCX avec le lien du dépôt en haut**, contenant :
   - la sortie de `git log --oneline --graph --all` après la partie 3 ;
   - les réponses aux questions des parties 1 à 4 (version d'un correctif après v2.0.0, quoi vérifier entre deux lots du rolling, métriques et seuil d'arrêt du canary…) ;
@@ -113,8 +113,8 @@ docker compose down   # arrêter
 
 ### Unité 04c – GitKraken (optionnel)
 - **Énoncé** : `COURS/Unit04/Unit 04c - GitKraken (optional).pdf`.
-- **À faire** : se connecter à GitHub depuis GitKraken (sans copier de jeton), cloner le dépôt donné par le professeur, créer la branche `release-<prénom>-1.2` (l'ancienne consigne `1.1-release` de `GitKarken.txt` n'est plus valable), committer, pousser, puis « Revert Commit ».
-- **À rendre**, dans le même document que 04b : capture du graphe montrant le commit et son revert, lien de la branche, deux phrases d'explication.
+- **Fait le 17/11** dans GitKraken, sur le dépôt `release-strategies-lab` : branche `release-francois-2.1` créée depuis `main`, commit « Add release notes for v2.1.0 » poussé, puis annulé par « Revert commit ».
+- **Rendu** dans `P04_DELIVERABLE.docx` : capture du graphe, lien de la branche, deux phrases d'explication.
 
 ### Hors périmètre
 `COURS/Unit04/Unit 04 - API Gateway` appartient à un autre projet (précision du 17/11) et `COURS/Unit11/Arbeitsblatt…` sont des fiches d'un autre module. Ils ne sont pas comptés.
@@ -132,7 +132,8 @@ Liste de contrôle :
 - [x] Unité 02 : `docker-compose.yml`, `query_*.json`, `logs-demo-export.json`, `dashboard.png`, comparaison dans `P02_DELIVERABLE.md`
 - [x] Unité 03 : `config.yaml`, `config_loader.py`, `terminal_output_3_envs.txt`
 - [x] Unité 04b : dépôt du labo poussé avec ses tags
-- [ ] Unité 04b : document de réponses (PDF ou DOCX, lien du dépôt en haut)
+- [x] Unité 04b : document de réponses `P04_DELIVERABLE.docx`, lien du dépôt en haut
+- [x] Unité 04c : exercice GitKraken, dans le même document
 - [ ] Dates limites : le planning du dossier porte les dates 2025-2026 ; à confirmer auprès du professeur
 
 ## 5. Mettre ce dossier sur Git
